@@ -1,0 +1,47 @@
+extends layout
+block content
+    h1(class="title") Nim
+    div(class="homepage")
+        button(type="button" class="btn-home-game") Play Game
+        table(class="highscore-table")
+            thead
+                tr
+                    th Highscores
+            thead
+                tr
+                    th(scope="col") Name
+                    th(scope="col") Time
+            tbody
+                each item in nav.scores
+                    tr
+                        th(scope="row")
+                        td #{item[0]}
+                        td #{item[1]}
+        
+        table(class="person-table")
+            thead
+                tr
+                    th #{name}
+            thead
+                tr
+                    th(scope="col") Wins
+                    th(scope="col") Loss
+            tbody
+                tr
+                    th(scope="row")
+                    td #{wins}
+                    td #{loss}
+            thead
+                tr
+                    th(scope="col") Win Percentage
+            tbody
+                tr
+                    th(scope="row")
+                    td #{percentage}
+    
+    div(class="game-setting")
+        div(class="container")
+            div(class="row")
+                div(class="col")
+                    p(class="section-title text-center") Modes
+        
