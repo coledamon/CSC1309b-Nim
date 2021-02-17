@@ -4,7 +4,7 @@ const bodyParser = require("body-parser");
 const path = require("path");
 const routes = require("./routes/routes");
 const cookieParser = require("cookie-parser");
-const debug = require('debug');
+const debug = require('debug')("app:app");
 
 const app = express();
 
@@ -32,9 +32,9 @@ app.use((req, res, next) => {
 });
 
 app.get("/", routes.index);
-app.post("/", routes.gameStart);
-app.get("/help", routes.help);
-app.get("/play", routes.playGame);
+// app.post("/", routes.gameStart);
+// app.get("/help", routes.help);
+// app.get("/play", routes.playGame);
 
 
 
