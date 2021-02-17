@@ -1,17 +1,24 @@
 doctype
 html
-  head
-    link(href='style.css' rel='stylesheet')
-    title=title
-  body
-    header  
-        P this is the header
-      nav this is the nav bar
-        
+    head
+        link(href='style.css' rel='stylesheet')
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+        title=title
+    body
+        header  
+            P this is the header
+        nav
+            div(class="collapse navbar-collapse" id="myNavbar")
+            ul(class="nav navbar-nav")
+                li(class="active")a(href="#") Home
+                li(class="active")a(href="#") Home
+                li(class="active")a(href="#") Home
+                li(class="active")a(href="#") Home
 
-    section
-      block content
-      
 
-    footer 
-      
+        section
+            block content
+
+
+        footer 
