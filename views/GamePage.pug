@@ -1,0 +1,21 @@
+extends layout 
+
+block content
+    //Alternativelly do =playername or something
+    h1(class="playername") *Insert Player Name* 
+        span(id="pieces")
+            //Fill this container with <21> pieces
+
+        h2 Amount
+        span(class="button") 1
+        span(class="button") 2
+        span(class="button") 3
+
+        //modal-popup here (style to be automatically display:none -> change when game over)
+        // centered modal - class="modal-dialog modal-dialog-centered"
+        // static backdrop - 
+        //probably want static backdrop modal -> so you can't click out of it when the game is over
+        span(class="modal")
+            h2(class="playername") *Insert Player Name* Wins!!!
+            span(class="button") Play Again?
+            span(class="button") Home
