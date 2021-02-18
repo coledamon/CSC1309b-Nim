@@ -32,9 +32,9 @@ app.use((req, res, next) => {
 });
 
 app.get("/", routes.index);
-// app.post("/", routes.gameStart);
-// app.get("/help", routes.help);
-// app.get("/play", routes.playGame);
+app.post("/", routes.gameStart);
+app.get("/help", routes.help);
+app.get("/play", routes.playGame);
 
 
 
