@@ -1,13 +1,10 @@
 extends layout 
 block content
-        div(class="gamepage center")
-            div(class="row")
-                div(class="col")
-            //Alternativelly do =playername or something
-            h2(class="playername center-block") Player Name
+        link(href="/css/game.css" rel='stylesheet')
+        
+        div(id="gamepage")
+            h2(class="playername") Player Name
             span(id="pieces")
-                p Pieces Here
-                //Fill this container with <21> pieces
 
             h3 Amount
             button(type="button" class="btn btn-outline-success") 1
@@ -19,3 +16,5 @@ block content
             h2(class="playername") Player Name Wins!!!
             button(type="button" class="btn btn-outline-success") Play Again
             button(type="button" class="btn btn-outline-success") Home
+
+        script(src="/js/game.js")
