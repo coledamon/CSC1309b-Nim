@@ -1,0 +1,10 @@
+#gamepage{
+    text-align: center;
+    margin: 2em;
+}
+
+#pieces{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
