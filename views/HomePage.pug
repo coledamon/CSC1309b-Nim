@@ -43,21 +43,21 @@ block content
         form
             div(class="container")
                 div(class="row")
-                    div(class="col")
-                        p(class="section-title text-center") Modes
-            button(type="button" class="btn btn-outline-primary btn-mode") Player vs Player
-            button(type="button" class="btn btn-outline-primary btn-mode") Player vs Computer
+                    div(class="col text-center")
+                        p(class="section-title") Modes
+                        button(type="button" data-bs-toggle="button" class="btn btn-outline-primary btn-mode") Player vs Player
+                        button(type="button" data-bs-toggle="button" class="btn btn-outline-primary btn-mode") Player vs Computer
             div(class="container")
                 div(class="row")
-                    div(class="col")
-                        p(class="section-title text-center") Levels
-            button(type="button" class="btn btn-outline-danger btn-level") Easy
-            button(type="button" class="btn btn-outline-danger btn-level") Medium
-            button(type="button" class="btn btn-outline-danger btn-level") Hard
-            div(class="form-check")
+                    div(class="col text-center")
+                        p(class="section-title") Levels
+                        button(type="button" id="dangerButton" data-bs-toggle="button" class="btn btn-outline-danger btn-level") Easy
+                        button(type="button" id="dangerButton" data-bs-toggle="button" class="btn btn-outline-danger btn-level") Medium
+                        button(type="button" id="dangerButton" data-bs-toggle="button" class="btn btn-outline-danger btn-level") Hard
+            div(class="form-check text-center")
                 input(class="form-check-input" type="radio" name="winCondition" id="defaultWinCondition")
                 label(class="form-check-label" for="defaultWinCondition") Person that takes the last piece wins
-            div(class="form-check")
+            div(class="form-check text-center")
                 input(class="form-check-input" type="radio" name="winCondition" id="secondaryWinCondition" checked)
                 label(class="form-check-label" for="secondaryWinCondition") Person that takes the last piece loses
             button(type="submit" class="btn btn-outline-dark btn-submit") Play
