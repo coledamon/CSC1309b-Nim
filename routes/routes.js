@@ -68,3 +68,7 @@ exports.help = (req, res) => {
         title: "Help"
     });
 };
+
+exports.databaseAdd = (req, res) => {
+
+};

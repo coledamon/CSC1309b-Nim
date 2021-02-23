@@ -1,4 +1,5 @@
 let pieces_container = document.getElementById("pieces");
+let start;
 
 populateAndRenderPieces = () => {
     
@@ -20,4 +21,24 @@ takePiece = (amount) => {
 
 window.onload = function(){
     populateAndRenderPieces();
+    start = Date.now();
 };
+
+endGame = () => {
+    let totalTime = Date.now() - start;
+    //display game over screen
+    //display play again/home buttons
+    let playerName;
+    let entry = {
+        time: totalTime,
+        winner: playerName
+    }
+
+    let xmlHttp = new XMLHttpRequest();
+        xmlHttp.open("POST", `/addToDatabase`)
+        xmlHttp.setRequestHeader("Content-type", "application/json");
+        xmlHttp.onreadystatechange = function() {
+
+        }
+        xmlHttp.send(JSON.stringify(entry));
+}
