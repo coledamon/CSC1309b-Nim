@@ -1,7 +1,7 @@
 extends layout
 block content
     
-    div(class="container ")
+    div(class="container pt-3 my-3 border")
         h1(class="title") Nim
         button(type="button" class="btn-home-game") Play Game
         table(class="highscore-table")
@@ -40,7 +40,7 @@ block content
                     th(scope="row")
                     td #{percentage}
     
-    div(class="game-setting text-center")
+    div(class="game-setting text-center container my-3 border")
         form
             div(class="container")
                 div(class="row")
