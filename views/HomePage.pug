@@ -1,7 +1,8 @@
 extends layout
 block content
-    h1(class="title") Nim
-    div(class="homepage")
+    
+    div(class="container ")
+        h1(class="title") Nim
         button(type="button" class="btn-home-game") Play Game
         table(class="highscore-table")
             thead
@@ -39,8 +40,8 @@ block content
                     th(scope="row")
                     td #{percentage}
     
-    div(class="game-setting")
-        form(action="/" method="POST")
+    div(class="game-setting text-center")
+        form
             div(class="container")
                 div(class="row")
                     div(class="col text-center")
@@ -61,5 +62,5 @@ block content
                 input(class="form-check-input" type="radio" name="winCondition" value="lastLoses" id="secondaryWinCondition" checked)
                 label(class="form-check-label" for="secondaryWinCondition") Person that takes the last piece loses
             button(type="submit" class="btn btn-outline-dark btn-submit") Play
-        button(type="button" class="btn btn-link btn-help") Help
+
         
