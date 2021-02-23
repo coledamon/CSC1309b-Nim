@@ -3,7 +3,7 @@ block content
         
         div(id="gamepage")
             h2(class="playername") Player Name
-            span(id="pieces")
+            span(id="pieces-container")
 
             h3 Amount
             button(id="oneBtn" type="button" class="btn btn-outline-success" onclick="takePiece(1);") 1
@@ -11,7 +11,7 @@ block content
             button(id="threeBtn" type="button" class="btn btn-outline-danger" onclick="takePiece(3);") 3
 
         //d-none = to hide win/loss screen
-        div(class="d-none")
+        div(id="end-modal")
             h2(class="playername") Player Name Wins!!!
             button(type="button" class="btn btn-outline-success") Play Again
             button(type="button" class="btn btn-outline-success") Home
