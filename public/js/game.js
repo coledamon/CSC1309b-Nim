@@ -20,7 +20,7 @@ takePiece = (amount) => {
 };
 
 checkForWin = () => {
-    if(pieces_container.childElementCount == 0){
+    if(pieces_container.childElementCount <= 0){
         console.log("game is over!");
         document.getElementById("end-modal").style.display = "block";
     }
