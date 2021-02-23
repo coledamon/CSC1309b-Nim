@@ -1,15 +1,14 @@
 extends layout 
 block content
-        link(href="/css/game.css" rel='stylesheet')
         
         div(id="gamepage")
             h2(class="playername") Player Name
             span(id="pieces")
 
             h3 Amount
-            button(type="button" class="btn btn-outline-success") 1
-            button(type="button" class="btn btn-outline-primary") 2
-            button(type="button" class="btn btn-outline-danger") 3
+            button(id="oneBtn" type="button" class="btn btn-outline-success" onclick="takePiece(1);") 1
+            button(id="twoBtn" type="button" class="btn btn-outline-primary" onclick="takePiece(2);") 2
+            button(id="threeBtn" type="button" class="btn btn-outline-danger" onclick="takePiece(3);") 3
 
         //d-none = to hide win/loss screen
         div(class="d-none")
