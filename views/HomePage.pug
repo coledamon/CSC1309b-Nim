@@ -40,7 +40,7 @@ block content
                     td #{percentage}
     
     div(class="game-setting")
-        form
+        form(action="/" method="POST")
             div(class="container")
                 div(class="row")
                     div(class="col text-center")
@@ -55,10 +55,10 @@ block content
                         button(type="button" id="dangerButton" data-bs-toggle="button" class="btn btn-outline-danger btn-level") Medium
                         button(type="button" id="dangerButton" data-bs-toggle="button" class="btn btn-outline-danger btn-level") Hard
             div(class="form-check text-center")
-                input(class="form-check-input" type="radio" name="winCondition" id="defaultWinCondition")
+                input(class="form-check-input" type="radio" name="winCondition" value="lastWins" id="defaultWinCondition")
                 label(class="form-check-label" for="defaultWinCondition") Person that takes the last piece wins
             div(class="form-check text-center")
-                input(class="form-check-input" type="radio" name="winCondition" id="secondaryWinCondition" checked)
+                input(class="form-check-input" type="radio" name="winCondition" value="lastLoses" id="secondaryWinCondition" checked)
                 label(class="form-check-label" for="secondaryWinCondition") Person that takes the last piece loses
             button(type="submit" class="btn btn-outline-dark btn-submit") Play
         button(type="button" class="btn btn-link btn-help") Help

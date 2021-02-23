@@ -31,15 +31,34 @@ exports.index = (req, res) => {
 };
 
 exports.gameStart = (req, res) => {
-    let name = req.body.name
-    res.render('HomePage', {
-        title: "Select your game settings",
-        name: name
-    });
+    req.session.player1Name = req.body.name != "" ? req.body.name : "Player 1";
+    req.session.gameType = req.body.gameType;
+    if(req.body.gameType == "pvp") {
+        req.session.player2Name = req.body.name2 != "" ? req.body.name2 : "Player 2";
+    }
+    else {
+        req.session.player2Name = "Computer";
+    }
+    req.session.winCon = req.body.winCondition;
+    res.redirect("/play");
 }
 exports.playGame = (req, res) => {
+    //determine who goes first
+    let firstPlayer;
+    if(Math.random() < 0.5) {
+        firstPlayer = "player1";
+    }
+    else {
+        firstPlayer = "player2";
+    }
+    console.log(firstPlayer);
     res.render('GamePage', {
-        title: "Play Nim!"
+        title: "Play Nim!",
+        firstPlayer,
+        player1Name: req.session.player1Name,
+        player2Name: req.session.player2Name,
+        winCon: req.session.winCon,
+        gameType: req.session.gameType
     });
     //set/update cookie on game win/lose
 };
