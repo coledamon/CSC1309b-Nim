@@ -18,6 +18,7 @@ takePiece = (amount) => {
     
     //probably call like other stuff here (like checkIfStack is 0 and change turn)
     checkForWin();
+    switchTurns();
 };
 
 checkForWin = () => {
@@ -26,6 +27,16 @@ checkForWin = () => {
         document.getElementById("end-modal").style.display = "block";
     }
 };
+
+switchTurns = () =>{
+    let currentPlayer = document.getElementById("currentPlayer");
+    let player1 = document.getElementById('player1').id;
+    if (currentPlayer.textContent == player1){
+        currentPlayer.innerHTML = "player2";
+    } else {
+        currentPlayer.innerHTML ="player1"
+    }
+}
 
 window.onload = function(){
     populateAndRenderPieces();

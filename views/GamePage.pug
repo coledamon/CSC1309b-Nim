@@ -4,6 +4,10 @@ block content
         div(id="gamepage")
             h2(class="playername") Player Name
             span(id="pieces-container")
+            div(id='currentPlayer' style ="display:none")=firstPlayer
+            div(id='player1' style ="display:none")=player1Name 
+            div(id='player2' style ="display:none")=player2Name
+
 
             h3 Amount
             button(id="oneBtn" type="button" class="btn btn-outline-success" onclick="takePiece(1);") 1
