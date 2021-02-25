@@ -17,8 +17,11 @@ populateAndRenderPieces = () => {
 
 takePiece = (amount) => {
     //console.log(pieces_container.firstElementChild);
-    for(i = 0; i < amount; i++) pieces_container.firstChild.remove();
-    
+    for(i = 0; i < amount; i++) {
+        if(pieces_container.hasChildNodes()){
+            pieces_container.firstChild.remove();
+        }  
+    }
     //probably call like other stuff here (like checkIfStack is 0 and change turn)
     checkForWin();
     switchTurns();

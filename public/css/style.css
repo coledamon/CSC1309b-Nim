@@ -41,7 +41,8 @@
 #pieces-container{
   display: flex;
   flex-direction: row;
-  justify-content: space-around;
+  justify-content: center;
+  margin: 0 10%;
 }
 
 .game-piece{
@@ -49,10 +50,37 @@
   height: 50px;
   border: 2px solid #000;
   border-radius: 25px;
+  margin: 0 0.5em;
 }
 
-#end-modal{
+/* modal stuff here */
+
+.modal{
   display: none;
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0,0,0,0.8);
 }
+
+.modal-content {
+  position: relative;
+  margin: auto;
+  padding: 0;
+  width: 50%;
+  height: 50%;
+}
+
+.modal-header {
+  padding: 2px 16px;
+  background-color: #444;
+  color: #fff;
+  text-align: center;
+}
+
+.modal-body {padding: 2px 16px;}
 
 /* ------------------------------------------------------HelpPage------------------------------------------------------------------------------ */
