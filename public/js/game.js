@@ -1,5 +1,7 @@
 
 let pieces_container = document.getElementById("pieces-container");
+const threeBtn = document.getElementById("threeBtn");
+const twoBtn = document.getElementById("twoBtn");
 let start;
 
 populateAndRenderPieces = () => {
@@ -25,7 +27,14 @@ takePiece = (amount) => {
 checkForWin = () => {
     if(pieces_container.childElementCount <= 0){
         console.log("game is over!");
+        twoBtn.style.visibility = "";
+        threeBtn.style.visibility = "";
         document.getElementById("end-modal").style.display = "block";
+        document.getElementById("gamepage").style.visibility = "Hidden";
+        endGame();
+    }
+    else {
+        checkValidMoves();
     }
 };
 
@@ -38,6 +47,16 @@ switchTurns = () =>{
         currentPlayer.innerHTML ="player1"
     }
 }
+checkValidMoves = () => {
+    console.log("here");
+    console.log(pieces_container.childElementCount);
+    if(pieces_container.childElementCount < 3) {
+        threeBtn.style.visibility = "Hidden";
+        if(pieces_container.childElementCount < 2) {
+            twoBtn.style.visibility = "Hidden";
+        }
+    }
+}
 
 window.onload = function(){
     populateAndRenderPieces();
@@ -47,6 +66,7 @@ window.onload = function(){
 
 endGame = () => {
     let totalTime = Date.now() - start;
+    console.log(totalTime);
     //display game over screen
     //display play again/home buttons
     let playerName;
@@ -59,7 +79,7 @@ endGame = () => {
         xmlHttp.open("POST", `/addToDatabase`)
         xmlHttp.setRequestHeader("Content-type", "application/json");
         xmlHttp.onreadystatechange = function() {
-
+            
         }
         xmlHttp.send(JSON.stringify(entry));
 }

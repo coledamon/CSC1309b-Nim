@@ -70,5 +70,5 @@ exports.help = (req, res) => {
 };
 
 exports.databaseAdd = (req, res) => {
-
+    
 };
