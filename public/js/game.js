@@ -1,3 +1,4 @@
+
 let pieces_container = document.getElementById("pieces-container");
 let start;
 
@@ -41,6 +42,7 @@ switchTurns = () =>{
 window.onload = function(){
     populateAndRenderPieces();
     start = Date.now();
+    console.log(data);
 };
 
 endGame = () => {

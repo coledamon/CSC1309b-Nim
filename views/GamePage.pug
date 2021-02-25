@@ -20,4 +20,13 @@ block content
             button(type="button" class="btn btn-outline-success") Play Again
             button(type="button" class="btn btn-outline-success") Home
 
+        script(type="text/javascript"). 
+            var data = {
+                title: "#{title}",
+                firstPlayer: "#{firstPlayer}",
+                player1Name: "#{player1Name}",
+                player2Name: "#{player2Name}",
+                winCon: "#{winCon}",
+                gameType: "#{gameType}"
+            }
         script(src="/js/game.js")
