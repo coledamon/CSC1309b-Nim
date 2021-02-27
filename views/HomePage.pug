@@ -5,38 +5,38 @@ block content
         button(type="button" class="btn-home-game") Play Game
         div(class="container")
             div(class="row justify-content-md-center")
-                div(class="col-4")
-                    table(class="highscore-table")
+                div(class="col-3")
+                    table(class="highscore-table ")
+                        thead
+                            tr(class="row justify-content-center")
+                                th(class="col-4") Highscores
                         thead
                             tr
-                                th Highscores
-                        thead
-                            tr
-                                th(scope="col") Name
-                                th(scope="col") Time
+                                th(scope="col" class="col-6 col-md-4") Name
+                                th(scope="col" class="col-6 col-md-4") Time
                         tbody
                             //- each item in nav.scores
                             //-     tr
                             //-         th(scope="row")
                             //-         td #{item[0]}
                             //-         td #{item[1]}
-                div(class="col-4") 
+                div(class="col-3") 
                     table(class="person-table")
                         thead
                             tr
                                 th #{name}
                         thead
                             tr
-                                th(scope="col") Wins
-                                th(scope="col") Loss
+                                th(scope="col" class="col-6 col-md-4") Wins
+                                th(scope="col" class="col-6 col-md-4") Loss
                         tbody
                             tr
                                 th(scope="row")
                                 td #{wins}
                                 td #{loss}
                         thead
-                            tr
-                                th(scope="col") Win Percentage
+                            tr(class="row justify-content-center")
+                                th(scope="col" class="col-4") Win Percentage
                         tbody
                             tr
                                 th(scope="row")
@@ -47,7 +47,7 @@ block content
             div(class="container")
                 div(class="row")
                     div(class="col text-center")
-                        p(href="#" class="section-title") Modes
+                        p(href="#" class="section-title  mt-2") Modes
                         div(class="btn-group btn-group-toggle" data-toggle="buttons")
                             label(class="btn btn-outline-primary btn-mode active") Player vs Player
                                 input(type="radio" name="gameMode" id="pvp" autocomplete="off" checked)
@@ -58,7 +58,7 @@ block content
             div(class="container")
                 div(class="row")
                     div(class="col text-center")
-                        p(class="section-title") Levels
+                        p(class="section-title  mt-2") Levels
                         div(class="btn-group btn-group-toggle" data-toggle="buttons")
                             label(class="btn btn-outline-danger active") Easy
                                 input(type="radio" name="difficulty" id="easyMode" autocomplete="off" checked)
@@ -75,10 +75,10 @@ block content
                         //- button(type="button" id="dangerButton" data-bs-toggle="button" class="btn btn-outline-danger btn-level") Easy
                         //- button(type="button" id="dangerButton" data-bs-toggle="button" class="btn btn-outline-danger btn-level") Medium
                         //- button(type="button" id="dangerButton" data-bs-toggle="button" class="btn btn-outline-danger btn-level") Hard
-            div(class="form-check text-center")
+            div(class="form-check text-center mt-2")
                 input(class="form-check-input" type="radio" name="winCondition" value="lastWins" id="defaultWinCondition")
                 label(class="form-check-label" for="defaultWinCondition") Person that takes the last piece wins
-            div(class="form-check text-center")
+            div(class="form-check text-center mt-2 mb-2")
                 input(class="form-check-input" type="radio" name="winCondition" value="lastLoses" id="secondaryWinCondition" checked)
                 label(class="form-check-label" for="secondaryWinCondition") Person that takes the last piece loses
             button(type="submit" class="btn btn-outline-dark btn-submit") Play
