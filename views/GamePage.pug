@@ -10,9 +10,13 @@ block content
 
 
             h3 Amount
-            button(id="oneBtn" type="button" class="btn btn-outline-success" onclick="takePiece(1);") 1
-            button(id="twoBtn" type="button" class="btn btn-outline-primary" onclick="takePiece(2);") 2
-            button(id="threeBtn" type="button" class="btn btn-outline-danger" onclick="takePiece(3);") 3
+            //button(id="oneBtn" type="button" class="btn btn-outline-success" onclick="takePiece(1);") 1
+            //button(id="twoBtn" type="button" class="btn btn-outline-primary" onclick="takePiece(2);") 2
+            //button(id="threeBtn" type="button" class="btn btn-outline-danger" onclick="takePiece(3);") 3
+            span(id="piece-button-container")
+                div(id="oneBtn" class="piece-button" onclick="takePiece(1);") 1
+                div(id="twoBtn" class="piece-button" onclick="takePiece(2);") 2
+                div(id="threeBtn" class="piece-button" onclick="takePiece(3);") 3
 
         //d-none = to hide win/loss screen
         div(id="end-modal" class="modal")

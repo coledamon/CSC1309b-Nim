@@ -50,11 +50,12 @@ div{
   margin: 2em;
 }
 
-#pieces-container{
+#pieces-container, #piece-button-container{
   display: flex;
   flex-direction: row;
   justify-content: center;
   margin: 0 10%;
+  user-select: none;
 }
 
 .game-piece{
@@ -63,6 +64,24 @@ div{
   border: 2px solid #000;
   border-radius: 25px;
   margin: 0 0.5em;
+}
+
+.piece-button{
+  width: 75px;
+  height: 75px;
+  border: 2px solid #000;
+  border-radius: 50px;
+  margin: 0 0.5em;
+  padding-top:8px;
+  font-size: 30px;
+}
+
+.piece-button:hover, .piece-button:focus{
+  border: 2px solid #fff;
+  border-radius: 50px;
+  background-color: #000;
+  color: #fff;
+  cursor: pointer;
 }
 
 /* modal stuff here */
@@ -79,11 +98,14 @@ div{
 }
 
 .modal-content {
-  position: relative;
+  position: absolute;
+  left: 50%;
+  top: 40%;
+  transform: translate(-50%, -50%);
   margin: auto;
   padding: 0;
   width: 50%;
-  height: 50%;
+  height: 20%;
 }
 
 .modal-header {
@@ -93,6 +115,8 @@ div{
   text-align: center;
 }
 
-.modal-body {padding: 2px 16px;}
+.modal-body {
+  margin: 0 auto;
+}
 
 /* ------------------------------------------------------HelpPage------------------------------------------------------------------------------ */
