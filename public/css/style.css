@@ -6,6 +6,18 @@
 
 /* ------------------------------------------------------HomePage------------------------------------------------------------------------------ */
 
+h1 {
+    font-family: 'Crete Round', serif;
+}
+
+div{
+    font-family: 'Crete Round', serif;
+}
+
+
+.highscore-table{
+    /* text-align: center; */
+}
 /* .home-body {
     
 } */
