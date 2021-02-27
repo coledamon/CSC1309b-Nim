@@ -3,61 +3,69 @@ block content
     h1(class="title text-center") Nim
     div(class="homepage d-flex justify-content-center align-items-center flex-column")
         button(type="button" class="btn-home-game") Play Game
-        table(class="highscore-table")
-            thead
-                tr
-                    th Highscores
-            thead
-                tr
-                    th(scope="col") Name
-                    th(scope="col") Time
-            tbody
-                //- each item in nav.scores
-                //-     tr
-                //-         th(scope="row")
-                //-         td #{item[0]}
-                //-         td #{item[1]}
-        
-        table(class="person-table")
-            thead
-                tr
-                    th #{name}
-            thead
-                tr
-                    th(scope="col") Wins
-                    th(scope="col") Loss
-            tbody
-                tr
-                    th(scope="row")
-                    td #{wins}
-                    td #{loss}
-            thead
-                tr
-                    th(scope="col") Win Percentage
-            tbody
-                tr
-                    th(scope="row")
-                    td #{percentage}
+        div(class="container")
+            div(class="row justify-content-md-center")
+                div(class="col-4")
+                    table(class="highscore-table")
+                        thead
+                            tr
+                                th Highscores
+                        thead
+                            tr
+                                th(scope="col") Name
+                                th(scope="col") Time
+                        tbody
+                            //- each item in nav.scores
+                            //-     tr
+                            //-         th(scope="row")
+                            //-         td #{item[0]}
+                            //-         td #{item[1]}
+                div(class="col-4") 
+                    table(class="person-table")
+                        thead
+                            tr
+                                th #{name}
+                        thead
+                            tr
+                                th(scope="col") Wins
+                                th(scope="col") Loss
+                        tbody
+                            tr
+                                th(scope="row")
+                                td #{wins}
+                                td #{loss}
+                        thead
+                            tr
+                                th(scope="col") Win Percentage
+                        tbody
+                            tr
+                                th(scope="row")
+                                td #{percentage}
     
     div(class="game-setting container text-center")
         form()
             div(class="container")
                 div(class="row")
                     div(class="col text-center")
-                        p(class="section-title") Modes
-                        button(type="button" data-bs-toggle="button" class="btn btn-outline-primary btn-mode") Player vs Player
-                        button(type="button" data-bs-toggle="button" class="btn btn-outline-primary btn-mode") Player vs Computer
+                        p(href="#" class="section-title") Modes
+                        div(class="btn-group btn-group-toggle" data-toggle="buttons")
+                            label(class="btn btn-outline-primary btn-mode active") Player vs Player
+                                input(type="radio" name="gameMode" id="pvp" autocomplete="off" checked)
+                            label(class="btn btn-outline-primary btn-mode") Player vs Computer
+                                input(type="radio" name="gameMode" id="pvc" autocomplete="off")
+                        //- button(type="button" data-bs-toggle="button" class="btn btn-outline-primary btn-mode") Player vs Player
+                        //- button(type="button" data-bs-toggle="button" class="btn btn-outline-primary btn-mode") Player vs Computer
             div(class="container")
                 div(class="row")
                     div(class="col text-center")
                         p(class="section-title") Levels
-                        div(class="btn-group btn-group-toggle" data-toggle="button")
+                        div(class="btn-group btn-group-toggle" data-toggle="buttons")
                             label(class="btn btn-outline-danger active") Easy
-                                input(type="radio" name="gameMode" id="easyMode" autocomplete="off" checked)
+                                input(type="radio" name="difficulty" id="easyMode" autocomplete="off" checked)
                             label(class="btn btn-outline-danger") Medium
-                                input(type="radio" name="gameMode" id="mediumMode" autocomplete="off")
+                                input(type="radio" name="difficulty" id="mediumMode" autocomplete="off")
                             label(class="btn btn-outline-danger") Hard
-                                input(type="radio" name="gameMode" id="hardMode" autocomplete="off")
+                                input(type="radio" name="difficulty" id="hardMode" autocomplete="off")
                             //- input(type="radio" class="btn-check" name="gameMode" id="dangerButton easyMode" autocomplete="off")
                             //- label(class="btn btn-outline-danger" for="easyMode") Easy
                             //- input(type="radio" class="btn-check" name="gameMode" id="dangerButton mediumMode" autocomplete="off")
