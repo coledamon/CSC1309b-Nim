@@ -18,6 +18,7 @@ mdb.once("open", (callback) => {
 
 let leaderboardSchema = mongoose.Schema ({
     name: String,
+    timeStr: String,
     time: String
 });
 
@@ -44,13 +45,7 @@ exports.gameStart = (req, res) => {
 }
 exports.playGame = (req, res) => {
     //determine who goes first
-    let firstPlayer;
-    if(Math.random() < 0.5) {
-        firstPlayer = "player1";
-    }
-    else {
-        firstPlayer = "player2";
-    }
+    let firstPlayer = Math.random() < 0.5 ? "player1" : "player2";
     console.log(firstPlayer);
     res.render('GamePage', {
         title: "Play Nim!",
@@ -70,5 +65,13 @@ exports.help = (req, res) => {
 };
 
 exports.databaseAdd = (req, res) => {
-    
+    let entry = new LeaderboardEntry({
+        name: req.body.winner,
+        time: req.body.time,
+        timeStr: req.body.timeStr
+    });
+
+    entry.save((err, entry) => {
+
+    });
 };

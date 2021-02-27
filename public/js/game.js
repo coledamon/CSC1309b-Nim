@@ -4,6 +4,11 @@ const threeBtn = document.getElementById("threeBtn");
 const twoBtn = document.getElementById("twoBtn");
 let start;
 
+window.onload = function(){
+    populateAndRenderPieces();
+    start = Date.now();
+    console.log(data);
+};
 populateAndRenderPieces = () => {
     
     //Add a piece 21 times
@@ -29,6 +34,7 @@ takePiece = (amount) => {
 
 checkForWin = () => {
     if(pieces_container.childElementCount <= 0){
+        console.log(data);
         console.log("game is over!");
         twoBtn.style.visibility = "";
         threeBtn.style.visibility = "";
@@ -51,7 +57,6 @@ switchTurns = () =>{
     }
 }
 checkValidMoves = () => {
-    console.log("here");
     console.log(pieces_container.childElementCount);
     if(pieces_container.childElementCount < 3) {
         threeBtn.style.visibility = "Hidden";
@@ -61,28 +66,37 @@ checkValidMoves = () => {
     }
 }
 
-window.onload = function(){
-    populateAndRenderPieces();
-    start = Date.now();
-    console.log(data);
-};
 
 endGame = () => {
     let totalTime = Date.now() - start;
     console.log(totalTime);
+    let totalTimeStr = Math.trunc(totalTime/60000).toString() + "\'" + ((totalTime/1000)-(Math.trunc(totalTime/60000))).toString() + "\"";
+    console.log(totalTimeStr);
     //display game over screen
     //display play again/home buttons
-    let playerName;
-    let entry = {
-        time: totalTime,
-        winner: playerName
-    }
-
-    let xmlHttp = new XMLHttpRequest();
-        xmlHttp.open("POST", `/addToDatabase`)
-        xmlHttp.setRequestHeader("Content-type", "application/json");
-        xmlHttp.onreadystatechange = function() {
-            
+    let playerName = document.getElementById("currentPlayer").innerHTML;
+    console.log(playerName);
+    if(data.gameType == "pvc") {
+        let entry = {
+            time: totalTime,
+            timestr: totalTimeStr,
+            winner: playerName
         }
-        xmlHttp.send(JSON.stringify(entry));
+        let xmlHttp = new XMLHttpRequest();
+            xmlHttp.open("POST", `/addToDatabase`)
+            xmlHttp.setRequestHeader("Content-type", "application/json");
+            xmlHttp.onreadystatechange = function() {
+                
+            }
+            xmlHttp.send(JSON.stringify(entry));
+    }
+}
+
+restartGame = () => {
+    document.getElementById("end-modal").style.display = "none";
+    document.getElementById("gamepage").style.visibility = "";
+    populateAndRenderPieces();
+    start = Date.now();
+    data.firstPlayer = Math.random() < 0.5 ? "player1" : "player2";
+    document.getElementById("currentPlayer").innerHTML = data.firstPlayer;
 }
