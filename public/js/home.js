@@ -1,6 +1,6 @@
 showNameBox = () => {
 	document.getElementById("nameContainer").style.visibility = "";
-	if(document.getElementById("pvc").checked) {
+	if(document.getElementById("pvp").checked) {
 		document.getElementById("name2").style.visibility = "";
 	}
 }
