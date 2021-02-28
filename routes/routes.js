@@ -19,21 +19,26 @@ mdb.once("open", (callback) => {
 let leaderboardSchema = mongoose.Schema ({
     name: String,
     timeStr: String,
-    time: String
+    time: Number
 });
 
 let LeaderboardEntry = mongoose.model("leaderboardEntries", leaderboardSchema);
 
 
 exports.index = (req, res) => {
-    res.render('HomePage', {
-        title: "Welcome to Nim"
+    let top = LeaderboardEntry.find().sort({time: 1}).limit(10);
+    top.exec((err, entries) => {
+        res.render('HomePage', {
+        title: "Welcome to Nim",
+        entries
     });
+    });
+    
 };
 
 exports.gameStart = (req, res) => {
     req.session.player1Name = req.body.name != "" ? req.body.name : "Player 1";
-    req.session.gameType = req.body.gameType;
+    req.session.gameType = req.body.gameMode;
     if(req.body.gameType == "pvp") {
         req.session.player2Name = req.body.name2 != "" ? req.body.name2 : "Player 2";
     }
@@ -41,6 +46,7 @@ exports.gameStart = (req, res) => {
         req.session.player2Name = "Computer";
     }
     req.session.winCon = req.body.winCondition;
+    req.session.difficulty = req.body.difficulty;
     res.redirect("/play");
 }
 exports.playGame = (req, res) => {
@@ -52,6 +58,7 @@ exports.playGame = (req, res) => {
         firstPlayer,
         player1Name: req.session.player1Name,
         player2Name: req.session.player2Name,
+        difficulty: req.body.difficulty,
         winCon: req.session.winCon,
         gameType: req.session.gameType
     });

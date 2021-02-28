@@ -4,7 +4,7 @@ const threeBtn = document.getElementById("threeBtn");
 const twoBtn = document.getElementById("twoBtn");
 let start;
 
-window.onload = function(){
+window.onload = () => {
     populateAndRenderPieces();
     start = Date.now();
     console.log(data);
@@ -68,15 +68,14 @@ checkValidMoves = () => {
 
 
 endGame = () => {
-    let totalTime = Date.now() - start;
-    console.log(totalTime);
-    let totalTimeStr = Math.trunc(totalTime/60000).toString() + "\'" + ((totalTime/1000)-(Math.trunc(totalTime/60000))).toString() + "\"";
-    console.log(totalTimeStr);
     //display game over screen
     //display play again/home buttons
-    let playerName = document.getElementById("currentPlayer").innerHTML;
-    console.log(playerName);
     if(data.gameType == "pvc") {
+        let totalTime = Date.now() - start;
+        // console.log(totalTime);
+        let totalTimeStr = Math.trunc(totalTime/60000).toString() + "\'" + ((totalTime/1000)-(Math.trunc(totalTime/60000))).toString() + "\"";
+        // console.log(totalTimeStr);
+        let playerName = document.getElementById("currentPlayer").innerHTML;
         let entry = {
             time: totalTime,
             timestr: totalTimeStr,

@@ -1,39 +1,39 @@
 extends layout 
 block content
         
-        div(id="gamepage")
-            h2(class="playername") Player Name
-            span(id="pieces-container")
-            div(id='currentPlayer' style ="display:none")=firstPlayer
-            div(id='player1' style ="display:none")=player1Name 
-            div(id='player2' style ="display:none")=player2Name
+    div(id="gamepage")
+        h2(class="playername") Player Name
+        span(id="pieces-container")
+        div(id='currentPlayer' style ="display:none")=firstPlayer
+        div(id='player1' style ="display:none")=player1Name 
+        div(id='player2' style ="display:none")=player2Name
 
 
-            h3 Amount
-            //button(id="oneBtn" type="button" class="btn btn-outline-success" onclick="takePiece(1);") 1
-            //button(id="twoBtn" type="button" class="btn btn-outline-primary" onclick="takePiece(2);") 2
-            //button(id="threeBtn" type="button" class="btn btn-outline-danger" onclick="takePiece(3);") 3
-            span(id="piece-button-container")
-                div(id="oneBtn" class="piece-button" onclick="takePiece(1);") 1
-                div(id="twoBtn" class="piece-button" onclick="takePiece(2);") 2
-                div(id="threeBtn" class="piece-button" onclick="takePiece(3);") 3
+        h3 Amount
+        //button(id="oneBtn" type="button" class="btn btn-outline-success" onclick="takePiece(1);") 1
+        //button(id="twoBtn" type="button" class="btn btn-outline-primary" onclick="takePiece(2);") 2
+        //button(id="threeBtn" type="button" class="btn btn-outline-danger" onclick="takePiece(3);") 3
+        span(id="piece-button-container")
+            div(id="oneBtn" class="piece-button" onclick="takePiece(1);") 1
+            div(id="twoBtn" class="piece-button" onclick="takePiece(2);") 2
+            div(id="threeBtn" class="piece-button" onclick="takePiece(3);") 3
 
-        //d-none = to hide win/loss screen
-        div(id="end-modal" class="modal")
-            div(class="modal-content")    
-                div(class="modal-header")
-                    h2(class="playername") Player Name Wins!!!
-                div(class="modal-body")
-                    button(type="button" class="btn btn-outline-success" onclick="restartGame()") Play Again
-                    button(type="button" class="btn btn-outline-success" onclick="window.location.href='/'") Home
+    //d-none = to hide win/loss screen
+    div(id="end-modal" class="modal")
+        div(class="modal-content")    
+            div(class="modal-header")
+                h2(class="playername") Player Name Wins!!!
+            div(class="modal-body")
+                button(type="button" class="btn btn-outline-success" onclick="restartGame()") Play Again
+                button(type="button" class="btn btn-outline-success" onclick="window.location.href='/'") Home
 
-        script(type="text/javascript"). 
-            var data = {
-                title: "#{title}",
-                firstPlayer: "#{firstPlayer}",
-                player1Name: "#{player1Name}",
-                player2Name: "#{player2Name}",
-                winCon: "#{winCon}",
-                gameType: "#{gameType}"
-            }
-        script(src="/js/game.js")
+    script(type="text/javascript"). 
+        var data = {
+            title: "#{title}",
+            firstPlayer: "#{firstPlayer}",
+            player1Name: "#{player1Name}",
+            player2Name: "#{player2Name}",
+            winCon: "#{winCon}",
+            gameType: "#{gameType}"
+        }
+    script(src="/js/game.js")
