@@ -27,9 +27,12 @@ block content
             var data = {
                 title: "#{title}",
                 firstPlayer: "#{firstPlayer}",
+                currentPlayerName: ""
                 player1Name: "#{player1Name}",
                 player2Name: "#{player2Name}",
                 winCon: "#{winCon}",
-                gameType: "#{gameType}"
+                gameType: "#{gameType}",
+                player1Wins: 0,
+                player2Wins: 0
             }
         script(src="/js/game.js")

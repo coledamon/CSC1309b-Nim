@@ -24,7 +24,6 @@ takePiece = (amount) => {
     }
     //probably call like other stuff here (like checkIfStack is 0 and change turn)
     checkForWin();
-    switchTurns();
 };
 
 checkForWin = () => {
@@ -35,19 +34,25 @@ checkForWin = () => {
         document.getElementById("end-modal").style.display = "block";
         document.getElementById("gamepage").style.visibility = "Hidden";
         endGame();
+        if(data.firstPlayer == "player1"){
+            data.player1Wins = data.player1Wins + 1;
+        }else {
+            data.player2Wins = data.player2Wins + 1;
+        }
+        console.log(data.player1Wins, data.player2Wins, data.firstPlayer);
     }
     else {
         checkValidMoves();
+        switchTurns();
     }
 };
 
 switchTurns = () =>{
-    let currentPlayer = document.getElementById("currentPlayer");
-    let player1 = document.getElementById('player1').id;
-    if (currentPlayer.textContent == player1){
-        currentPlayer.innerHTML = "player2";
+    let currentPlayer = data.firstPlayer;
+    if (currentPlayer == "player1"){
+        data.firstPlayer = "player2";
     } else {
-        currentPlayer.innerHTML ="player1"
+        data.firstPlayer = "player1";
     }
 }
 checkValidMoves = () => {
