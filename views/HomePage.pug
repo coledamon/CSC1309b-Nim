@@ -6,40 +6,31 @@ block content
         div(class="container")
             div(class="row justify-content-md-center")
                 div(class="col-3")
-                    table(class="highscore-table ")
-                        thead
-                            tr(class="row justify-content-center")
-                                th(class="col-4") Highscores
+                    H4 HighScores
+                    table(class="highscore-table table table-bordered")
                         thead
                             tr
-                                th(scope="col" class="col-6 col-md-4") Name
-                                th(scope="col" class="col-6 col-md-4") Time
+                                th(scope="col" class="") Name
+                                th(scope="col" class="") Time
                         tbody
                             each item in entries
                                 tr
-                                    th(scope="row")
+                                    //th(scope="row")
                                     td #{item.name}
                                     td #{item.timeStr}
+
                 div(class="col-3") 
-                    table(class="person-table")
-                        thead
-                            tr
-                                th #{name}
+                    H4 #{name}
+                    table(class="person-table table table-bordered")
                         thead
                             tr
                                 th(scope="col" class="col-6 col-md-4") Wins
                                 th(scope="col" class="col-6 col-md-4") Loss
+                                th(scope="col" class="col-6 col-md-4") Win Percentage
                         tbody
                             tr
-                                th(scope="row")
                                 td #{wins}
                                 td #{loss}
-                        thead
-                            tr(class="row justify-content-center")
-                                th(scope="col" class="col-4") Win Percentage
-                        tbody
-                            tr
-                                th(scope="row")
                                 td #{percentage}  
 
     div(class="game-setting container text-center" id="settings" style="Visibility: Hidden")
@@ -73,9 +64,9 @@ block content
                                 //- label(class="btn btn-outline-danger" for="mediumMode") Medium
                                 //- input(type="radio" class="btn-check" name="gameMode" id="dangerButton hardMode" autocomplete="off")
                                 //- label(class="btn btn-outline-danger" for="hardMode") Hard
-                            //- button(type="button" id="dangerButton" data-bs-toggle="button" class="btn btn-outline-danger btn-level") Easy
-                            //- button(type="button" id="dangerButton" data-bs-toggle="button" class="btn btn-outline-danger btn-level") Medium
-                            //- button(type="button" id="dangerButton" data-bs-toggle="button" class="btn btn-outline-danger btn-level") Hard
+                                //- button(type="button" id="dangerButton" data-bs-toggle="button" class="btn btn-outline-danger btn-level") Easy
+                                //- button(type="button" id="dangerButton" data-bs-toggle="button" class="btn btn-outline-danger btn-level") Medium
+                                //- button(type="button" id="dangerButton" data-bs-toggle="button" class="btn btn-outline-danger btn-level") Hard
                 div(class="form-check text-center mt-2")
                     input(class="form-check-input" type="radio" name="winCondition" value="lastWins" id="defaultWinCondition")
                     label(class="form-check-label" for="defaultWinCondition") Person that takes the last piece wins
@@ -90,7 +81,7 @@ block content
                             input(type="text" name="name" placeholder="Enter Your Name") 
                         br
                         label(id="name2" style="Visibility: Hidden") Enter Player 2 Name: 
-                            input(type="text" name="name2"  placeholder="Enter Your Name") 
+                            input(type="text" name="name2" placeholder="Enter Your Name") 
                 button(type="submit" id="playButton" class="btn btn-outline-dark btn-submit") Play
 
     script(src="/js/home.js")
