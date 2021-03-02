@@ -75,6 +75,7 @@ endGame = () => {
     //display game over screen
     //display play again/home buttons
     let winningPlayer = data.winCon == "lastWins" ? data.currentPlayer : getOtherPlayer();
+    
     document.getElementById("winnername").innerHTML = winningPlayer.substring(1) + " Wins!!";
     if(data.gameType == "pvc" && (winningPlayer == "1" + data.player1Name)) {
         let totalTime = Date.now() - start;
@@ -84,7 +85,7 @@ endGame = () => {
         let entry = {
             time: totalTime,
             timestr: totalTimeStr,
-            winner: winningPlayer.substring(1)
+            winner: winningPlayer.substring(1) == "Player 1" ? "Anonymous" : winningPlayer.substring(1)
         }
         let xmlHttp = new XMLHttpRequest();
             xmlHttp.open("POST", `/addToDatabase`)
