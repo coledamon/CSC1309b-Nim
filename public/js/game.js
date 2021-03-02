@@ -9,6 +9,9 @@ let start;
 window.onload = () => {
     populateAndRenderPieces();
     start = Date.now();
+    if(data.player1Name == "") {
+        window.location.href="/";
+    }
     console.log(data);
     playerName.innerHTML = data.currentPlayer.substring(1);
 };
