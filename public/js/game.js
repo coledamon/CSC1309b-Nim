@@ -1,13 +1,16 @@
+// const { data } = require("jquery");
 
 let pieces_container = document.getElementById("pieces-container");
 const threeBtn = document.getElementById("threeBtn");
 const twoBtn = document.getElementById("twoBtn");
+const playerName = document.getElementById("currentPlayer");
 let start;
 
 window.onload = () => {
     populateAndRenderPieces();
     start = Date.now();
     console.log(data);
+    playerName.innerHTML = data.currentPlayer.substring(1);
 };
 populateAndRenderPieces = () => {
     
@@ -40,12 +43,6 @@ checkForWin = () => {
         document.getElementById("end-modal").style.display = "block";
         document.getElementById("gamepage").style.visibility = "Hidden";
         endGame();
-        if(data.firstPlayer == "player1"){
-            data.player1Wins = data.player1Wins + 1;
-        }else {
-            data.player2Wins = data.player2Wins + 1;
-        }
-        console.log(data.player1Wins, data.player2Wins, data.firstPlayer);
     }
     else {
         checkValidMoves();
@@ -54,12 +51,8 @@ checkForWin = () => {
 };
 
 switchTurns = () =>{
-    let currentPlayer = data.firstPlayer;
-    if (currentPlayer == "player1"){
-        data.firstPlayer = "player2";
-    } else {
-        data.firstPlayer = "player1";
-    }
+    data.currentPlayer = data.currentPlayer == "1" + data.player1Name ? "2" + data.player2Name : "1" + data.player1Name;
+    playerName.innerHTML = data.currentPlayer.substring(1);
 }
 checkValidMoves = () => {
     console.log(pieces_container.childElementCount);
@@ -71,20 +64,24 @@ checkValidMoves = () => {
     }
 }
 
+getOtherPlayer = () => {
+    return data.currentPlayer == "1" + data.player1Name ? data.player2Name : data.player1Name;
+}
 
 endGame = () => {
     //display game over screen
     //display play again/home buttons
-    if(data.gameType == "pvc") {
+    let winningPlayer = data.winCon == "lastWins" ? data.currentPlayer.substring(1) : getOtherPlayer();
+    document.getElementById("winnername").innerHTML = winningPlayer + " Wins!!";
+    if(data.gameType == "pvc" && (winningPlayer == data.player1Name)) {
         let totalTime = Date.now() - start;
         // console.log(totalTime);
         let totalTimeStr = Math.trunc(totalTime/60000).toString() + "\'" + ((totalTime/1000)-(Math.trunc(totalTime/60000))).toString() + "\"";
         // console.log(totalTimeStr);
-        let playerName = document.getElementById("currentPlayer").innerHTML;
         let entry = {
             time: totalTime,
             timestr: totalTimeStr,
-            winner: playerName
+            winner: winningPlayer
         }
         let xmlHttp = new XMLHttpRequest();
             xmlHttp.open("POST", `/addToDatabase`)
@@ -94,6 +91,14 @@ endGame = () => {
             }
             xmlHttp.send(JSON.stringify(entry));
     }
+    else if(data.gameType == "pvp") {
+        if(winningPlayer == data.player1Name){
+            data.player1Wins++;
+        }else {
+            data.player2Wins++;
+        }
+    }
+    console.log(data.player1Wins, data.player2Wins, winningPlayer);
 }
 
 restartGame = () => {
@@ -101,6 +106,7 @@ restartGame = () => {
     document.getElementById("gamepage").style.visibility = "";
     populateAndRenderPieces();
     start = Date.now();
-    data.firstPlayer = Math.random() < 0.5 ? "player1" : "player2";
-    document.getElementById("currentPlayer").innerHTML = data.firstPlayer;
+    data.firstPlayer = Math.random() < 0.5 ? "1" + data.player1Name : "2" + data.player2Name;
+    data.currentPlayer = data.firstPlayer;
+    playerName.innerHTML = data.currentPlayer.substring(1);
 }

@@ -39,7 +39,7 @@ exports.index = (req, res) => {
 exports.gameStart = (req, res) => {
     req.session.player1Name = req.body.name != "" ? req.body.name : "Player 1";
     req.session.gameType = req.body.gameMode;
-    if(req.body.gameType == "pvp") {
+    if(req.body.gameMode == "pvp") {
         req.session.player2Name = req.body.name2 != "" ? req.body.name2 : "Player 2";
     }
     else {
@@ -51,7 +51,7 @@ exports.gameStart = (req, res) => {
 }
 exports.playGame = (req, res) => {
     //determine who goes first
-    let firstPlayer = Math.random() < 0.5 ? "player1" : "player2";
+    let firstPlayer = Math.random() < 0.5 ? "1" + req.session.player1Name : "2" + req.session.player2Name;
     console.log(firstPlayer);
     res.render('GamePage', {
         title: "Play Nim!",
@@ -75,7 +75,7 @@ exports.databaseAdd = (req, res) => {
     let entry = new LeaderboardEntry({
         name: req.body.winner,
         time: req.body.time,
-        timeStr: req.body.timeStr
+        timeStr: req.body.timestr
     });
 
     entry.save((err, entry) => {

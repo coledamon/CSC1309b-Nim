@@ -2,11 +2,8 @@ extends layout
 block content
         
     div(id="gamepage")
-        h2(class="playername") Player Name
+        h2(class="playername" id="currentPlayer") #{currentPlayer}
         span(id="pieces-container")
-        div(id='currentPlayer' style ="display:none")=firstPlayer
-        div(id='player1' style ="display:none")=player1Name 
-        div(id='player2' style ="display:none")=player2Name
 
 
         h3 Amount
@@ -22,7 +19,7 @@ block content
     div(id="end-modal" class="modal")
         div(class="modal-content")    
             div(class="modal-header")
-                h2(class="playername") Player Name Wins!!!
+                h2(class="playername" id="winnername") 
             div(class="modal-body")
                 button(type="button" class="btn btn-outline-success" onclick="restartGame()") Play Again
                 button(type="button" class="btn btn-outline-success" onclick="window.location.href='/'") Home
@@ -31,7 +28,7 @@ block content
             var data = {
                 title: "#{title}",
                 firstPlayer: "#{firstPlayer}",
-                currentPlayerName: ""
+                currentPlayer: "#{firstPlayer}",
                 player1Name: "#{player1Name}",
                 player2Name: "#{player2Name}",
                 winCon: "#{winCon}",
