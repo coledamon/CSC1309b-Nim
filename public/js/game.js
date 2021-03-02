@@ -68,15 +68,15 @@ checkValidMoves = () => {
 }
 
 getOtherPlayer = () => {
-    return data.currentPlayer == "1" + data.player1Name ? data.player2Name : data.player1Name;
+    return data.currentPlayer == "1" + data.player1Name ? "2" + data.player2Name : "1" + data.player1Name;
 }
 
 endGame = () => {
     //display game over screen
     //display play again/home buttons
-    let winningPlayer = data.winCon == "lastWins" ? data.currentPlayer.substring(1) : getOtherPlayer();
-    document.getElementById("winnername").innerHTML = winningPlayer + " Wins!!";
-    if(data.gameType == "pvc" && (winningPlayer == data.player1Name)) {
+    let winningPlayer = data.winCon == "lastWins" ? data.currentPlayer : getOtherPlayer();
+    document.getElementById("winnername").innerHTML = winningPlayer.substring(1) + " Wins!!";
+    if(data.gameType == "pvc" && (winningPlayer == "1" + data.player1Name)) {
         let totalTime = Date.now() - start;
         // console.log(totalTime);
         let totalTimeStr = Math.trunc(totalTime/60000).toString() + "\'" + ((totalTime/1000)-(Math.trunc(totalTime/60000))).toString() + "\"";
@@ -84,7 +84,7 @@ endGame = () => {
         let entry = {
             time: totalTime,
             timestr: totalTimeStr,
-            winner: winningPlayer
+            winner: winningPlayer.substring(1)
         }
         let xmlHttp = new XMLHttpRequest();
             xmlHttp.open("POST", `/addToDatabase`)
