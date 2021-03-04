@@ -1,7 +1,7 @@
 /* ------------------------------------------------------Layout------------------------------------------------------------------------------ */
 
 html,section,body{
-  background-color: #9F86C0;
+  background-color: #e0d6ff;
 }
 
 nav{
@@ -53,6 +53,10 @@ div{
   margin: 2em;
 }
 
+#gamepage > h2, #gamepage > h3{
+  margin: 0.75em 0;
+}
+
 #pieces-container, #piece-button-container{
   display: flex;
   flex-direction: row;
@@ -64,15 +68,19 @@ div{
 .game-piece{
   width: 50px;
   height: 50px;
-  border: 2px solid #000;
+  border: 2px solid #222;
+  background-color: #ddd;
   border-radius: 25px;
-  margin: 0 0.5em;
+  margin: 0 0.2em;
+  
 }
 
 .piece-button{
   width: 75px;
   height: 75px;
-  border: 2px solid #000;
+  color: #fff;
+  border: 2px solid #fff;
+  background-color: #000;
   border-radius: 50px;
   margin: 0 0.5em;
   padding-top:8px;
@@ -82,11 +90,36 @@ div{
 .piece-button:hover, .piece-button:focus{
   border: 2px solid #fff;
   border-radius: 50px;
-  background-color: #000;
-  color: #fff;
+  background-color: #fff;
+  color: #000;
   cursor: pointer;
 }
 
+.removed-piece{
+  
+  /*opacity: 0;*/
+
+  /*-webkit-animation-name: fadeout;
+  -webkit-animation-duration: 0.2s;
+  animation-name: fadeout;
+  animation-duration: 0.2s;*/
+
+  -webkit-animation: flexShrink 0.5s ease forwards;
+  animation: flexShrink 0.5s ease forwards;
+  
+}
+@-webkit-keyframes flexShrink {
+  to {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+}
+@keyframes flexShrink {
+  to {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+}
 /* modal stuff here */
 
 .modal{
@@ -108,7 +141,13 @@ div{
   margin: auto;
   padding: 0;
   width: 50%;
-  height: 20%;
+  height: 30%;
+  background-color: #222;
+
+  -webkit-animation-name: movedown;
+  -webkit-animation-duration: 0.5s;
+  animation-name: movedown;
+  animation-duration: 0.5s
 }
 
 .modal-header {
@@ -120,6 +159,27 @@ div{
 
 .modal-body {
   margin: 0 auto;
+}
+
+/*modal animation*/
+@-webkit-keyframes movedown {
+  from {top:-500px; opacity:0} 
+  to {top:40%; opacity:1}
+}
+
+@keyframes movedown {
+  from {top:-500px; opacity:0}
+  to {top:40%; opacity:1}
+}
+
+@-webkit-keyframes fadeout {
+  from {opacity:1} 
+  to {opacity:0}
+}
+
+@keyframes fadeout {
+  from {opacity:1}
+  to {opacity:0}
 }
 
 /* ------------------------------------------------------HelpPage------------------------------------------------------------------------------ */

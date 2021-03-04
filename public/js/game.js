@@ -21,6 +21,11 @@ populateAndRenderPieces = () => {
     for(i = 0; i < 21; i++){
         let piece = document.createElement("span");
         piece.className = "game-piece";
+        // adds to every button when (the only) animation ends delete piece
+        piece.addEventListener('animationend', function(){
+            piece.remove();
+            checkForWin();
+        });
         pieces_container.appendChild(piece);
     };
         
@@ -28,13 +33,14 @@ populateAndRenderPieces = () => {
 
 takePiece = (amount) => {
     //console.log(pieces_container.firstElementChild);
-    for(i = 0; i < amount; i++) {
+    let pieces_left = pieces_container.childElementCount - 1;
+    for(i = pieces_left; i > pieces_left - amount; i--) {
         if(pieces_container.hasChildNodes()){
-            pieces_container.firstChild.remove();
+            //pieces_container.firstChild.remove();
+            pieces_container.children.item(i).classList.add('removed-piece');
         }  
     }
-    //probably call like other stuff here (like checkIfStack is 0 and change turn)
-    checkForWin();
+    
 };
 
 checkForWin = () => {
@@ -69,6 +75,24 @@ checkValidMoves = () => {
 
 getOtherPlayer = () => {
     return data.currentPlayer == "1" + data.player1Name ? "2" + data.player2Name : "1" + data.player1Name;
+}
+
+computerTurn = () =>{
+    //NOT TESTED
+    var difficulty = data.difficulty;
+    if(difficulty == "medium"){
+        var randomDifficulty = Math.floor(Math.random() * Math.floor(2))
+        if(randomDifficulty == 0){
+            difficulty = "easy";
+        }
+    }
+    if (difficulty == "easy"){
+        var randomPiece = Math.floor(Math.random() * Math.floor(3)) + 1;
+        takePiece(randomPiece);
+    } else {
+        //hard stat
+    }
+
 }
 
 endGame = () => {
