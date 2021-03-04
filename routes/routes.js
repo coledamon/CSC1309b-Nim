@@ -58,7 +58,7 @@ exports.playGame = (req, res) => {
         firstPlayer,
         player1Name: req.session.player1Name,
         player2Name: req.session.player2Name,
-        difficulty: req.body.difficulty,
+        difficulty: req.session.difficulty,
         winCon: req.session.winCon,
         gameType: req.session.gameType
     });
