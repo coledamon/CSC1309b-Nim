@@ -1,6 +1,6 @@
 // const { data } = require("jquery");
 
-const { data } = require("jquery");
+//const { data } = require("jquery");
 
 let pieces_container = document.getElementById("pieces-container");
 const oneBtn = document.getElementById("oneBtn");
@@ -44,7 +44,6 @@ takePiece = (amount) => {
             pieces_container.children.item(i).classList.add('removed-piece');
         }  
     }
-    
 };
 
 checkForWin = () => {
@@ -68,6 +67,7 @@ switchTurns = () =>{
     playerName.innerHTML = data.currentPlayer.substring(1);
     if(data.gameType == "pvc" && data.currentPlayer == "2Computer"){ computerTurn();}
 }
+
 checkValidMoves = () => {
     console.log(pieces_container.childElementCount);
     if(pieces_container.childElementCount < 3) {
@@ -96,20 +96,19 @@ computerTurn = () =>{
         numPieces = Math.floor(Math.random() * Math.floor(3)) + 1;
     } else {
         //hard stat
-        if(data.winCon == "")
     }
     threeBtn.style.visibility = "Hidden";
     twoBtn.style.visibility = "Hidden";
     oneBtn.style.visibility = "Hidden";
 
-    setTimeout(takePiece, 000, numPieces)//waits a few seconds
+    setTimeout(takePiece, 1000, numPieces)//waits a few seconds
     setTimeout(function(){
         threeBtn.style.visibility = "Visible";
         twoBtn.style.visibility = "Visible";
         oneBtn.style.visibility = "Visible";
     }, 1000);
+    console.log("end computer turn")
     //takePiece(numPieces);
-
 }
 
 endGame = () => {
