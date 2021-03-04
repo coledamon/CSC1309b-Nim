@@ -28,10 +28,16 @@ let LeaderboardEntry = mongoose.model("leaderboardEntries", leaderboardSchema);
 exports.index = (req, res) => {
     let top = LeaderboardEntry.find().sort({time: 1}).limit(10);
     top.exec((err, entries) => {
+        let wins = req.cookies.dailyWinStats != null ? req.cookies.dailyWinStats.wins : 0;
+        let losses = req.cookies.dailyWinStats != null ? req.cookies.dailyWinStats.losses : 0;
+        let winRate = (losses == 0 && wins == 0) ? "0%" : (100*wins)/(losses+wins) + "%";
         res.render('HomePage', {
-        title: "Welcome to Nim",
-        entries
-    });
+            title: "Welcome to Nim",
+            entries,
+            wins,
+            losses,
+            winRate
+        });
     });
     
 };
@@ -81,4 +87,30 @@ exports.databaseAdd = (req, res) => {
     entry.save((err, entry) => {
 
     });
+};
+
+exports.cookieUpdate = (req, res) => {
+    let stats;
+    if(req.cookies.dailyWinStats) {
+        stats = JSON.parse(dailyWinStats);
+    }
+    else {
+        stats = {
+            wins: 0,
+            losses: 0
+        }
+    }
+    console.log(stats);
+    if(req.body.gameWon) {
+        stats.wins++
+    }
+    else {
+        stats.losses++;   
+    }
+    console.log(stats);
+    // res.cookie("dailyWinStats", stats, new Date().setHours(23,59,59,0));
+    res.cookie("dailyWinStats", JSON.stringify(stats), 100000);
+    res.cookie(`lastTimeHere`, new Date(), 2147483647);
+    res.cookie("visited", 1, {maxAge:99999999999});
+    
 };

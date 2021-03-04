@@ -5,10 +5,15 @@ const path = require("path");
 const routes = require("./routes/routes");
 const cookieParser = require("cookie-parser");
 const debug = require('debug')("app:app");
+const cors = require("cors");
 
 const app = express();
 
-app.use(cookieParser(""));
+var corsOptions = {
+    origin: '*',
+    credentials: true };
+
+app.use(cors(corsOptions));
 app.set("view engine", "pug");
 app.set("views", __dirname + "/views");
 app.use(express.static(path.join(__dirname, "/public")));
@@ -24,18 +29,14 @@ app.use(expressSession({
 	resave: true
 }));
 
-
-app.use((req, res, next) => {
-    res.header("Access-Control-Allow-Origin", "*");
-    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-    next();
-});
+app.use(cookieParser());
 
 app.get("/", routes.index);
 app.post("/", routes.gameStart);
 app.get("/help", routes.help);
 app.get("/play", routes.playGame);
 app.post("/addToDatabase", routes.databaseAdd);
+app.post("/updateCookie", routes.cookieUpdate);
 
 
 

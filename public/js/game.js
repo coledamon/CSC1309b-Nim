@@ -77,32 +77,52 @@ endGame = () => {
     let winningPlayer = data.winCon == "lastWins" ? data.currentPlayer : getOtherPlayer();
     
     document.getElementById("winnername").innerHTML = winningPlayer.substring(1) + " Wins!!";
-    if(data.gameType == "pvc" && (winningPlayer == "1" + data.player1Name)) {
-        let totalTime = Date.now() - start;
-        // console.log(totalTime);
-        let totalTimeStr = Math.trunc(totalTime/60000).toString() + "\'" + ((totalTime/1000)-(Math.trunc(totalTime/60000))).toString() + "\"";
-        // console.log(totalTimeStr);
-        let entry = {
-            time: totalTime,
-            timestr: totalTimeStr,
-            winner: winningPlayer.substring(1) == "Player 1" ? "Anonymous" : winningPlayer.substring(1)
-        }
-        let xmlHttp = new XMLHttpRequest();
-            xmlHttp.open("POST", `/addToDatabase`)
-            xmlHttp.setRequestHeader("Content-type", "application/json");
-            xmlHttp.onreadystatechange = function() {
-                
+    if(data.gameType == "pvc") {
+        if(winningPlayer == "1" + data.player1Name) {//pvc win
+            //cookie add win
+            let totalTime = Date.now() - start;
+            // console.log(totalTime);
+            let totalTimeStr = Math.trunc(totalTime/60000).toString() + "\'" + ((totalTime/1000)-(Math.trunc(totalTime/60000))).toString() + "\"";
+            // console.log(totalTimeStr);
+            let entry = {
+                time: totalTime,
+                timestr: totalTimeStr,
+                winner: winningPlayer.substring(1) == "Player 1" ? "Anonymous" : winningPlayer.substring(1)
             }
-            xmlHttp.send(JSON.stringify(entry));
+            let xmlHttp = new XMLHttpRequest();
+                xmlHttp.open("POST", `/addToDatabase`)
+                xmlHttp.setRequestHeader("Content-type", "application/json");
+                xmlHttp.onreadystatechange = function() {
+                    
+                }
+                xmlHttp.send(JSON.stringify(entry));
+            sendCookie(true);
+        }
+        else {//pvc lose
+            sendCookie(false);
+        }
     }
     else if(data.gameType == "pvp") {
-        if(winningPlayer == data.player1Name){
+        if(winningPlayer.substring(1) == data.player1Name){
             data.player1Wins++;
         }else {
             data.player2Wins++;
         }
     }
     console.log(data.player1Wins, data.player2Wins, winningPlayer);
+}
+
+sendCookie = (wonGame) => {
+    let win = {
+        gameWon: wonGame
+    }
+    let xmlHttp = new XMLHttpRequest();
+                xmlHttp.open("POST", `/updateCookie`)
+                xmlHttp.setRequestHeader("Content-type", "application/json");
+                xmlHttp.onreadystatechange = function() {
+                    
+                }
+                xmlHttp.send(JSON.stringify(win));
 }
 
 restartGame = () => {
