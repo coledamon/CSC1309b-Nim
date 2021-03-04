@@ -1,6 +1,9 @@
 // const { data } = require("jquery");
 
+//const { data } = require("jquery");
+
 let pieces_container = document.getElementById("pieces-container");
+const oneBtn = document.getElementById("oneBtn");
 const threeBtn = document.getElementById("threeBtn");
 const twoBtn = document.getElementById("twoBtn");
 const playerName = document.getElementById("currentPlayer");
@@ -14,6 +17,7 @@ window.onload = () => {
     }
     console.log(data);
     playerName.innerHTML = data.currentPlayer.substring(1);
+    if(data.gameType == "pvc" && data.currentPlayer == "2Computer"){ computerTurn();}
 };
 populateAndRenderPieces = () => {
     
@@ -40,7 +44,6 @@ takePiece = (amount) => {
             pieces_container.children.item(i).classList.add('removed-piece');
         }  
     }
-    
 };
 
 checkForWin = () => {
@@ -62,7 +65,9 @@ checkForWin = () => {
 switchTurns = () =>{
     data.currentPlayer = data.currentPlayer == "1" + data.player1Name ? "2" + data.player2Name : "1" + data.player1Name;
     playerName.innerHTML = data.currentPlayer.substring(1);
+    if(data.gameType == "pvc" && data.currentPlayer == "2Computer"){ computerTurn();}
 }
+
 checkValidMoves = () => {
     console.log(pieces_container.childElementCount);
     if(pieces_container.childElementCount < 3) {
@@ -80,6 +85,7 @@ getOtherPlayer = () => {
 computerTurn = () =>{
     //NOT TESTED
     var difficulty = data.difficulty;
+    var numPieces = 0;
     if(difficulty == "medium"){
         var randomDifficulty = Math.floor(Math.random() * Math.floor(2))
         if(randomDifficulty == 0){
@@ -87,12 +93,22 @@ computerTurn = () =>{
         }
     }
     if (difficulty == "easy"){
-        var randomPiece = Math.floor(Math.random() * Math.floor(3)) + 1;
-        takePiece(randomPiece);
+        numPieces = Math.floor(Math.random() * Math.floor(3)) + 1;
     } else {
         //hard stat
     }
+    threeBtn.style.visibility = "Hidden";
+    twoBtn.style.visibility = "Hidden";
+    oneBtn.style.visibility = "Hidden";
 
+    setTimeout(takePiece, 1000, numPieces)//waits a few seconds
+    setTimeout(function(){
+        threeBtn.style.visibility = "Visible";
+        twoBtn.style.visibility = "Visible";
+        oneBtn.style.visibility = "Visible";
+    }, 1000);
+    console.log("end computer turn")
+    //takePiece(numPieces);
 }
 
 endGame = () => {
