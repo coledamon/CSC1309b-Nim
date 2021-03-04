@@ -24,6 +24,7 @@ populateAndRenderPieces = () => {
         // adds to every button when (the only) animation ends delete piece
         piece.addEventListener('animationend', function(){
             piece.remove();
+            checkForWin();
         });
         pieces_container.appendChild(piece);
     };
@@ -39,7 +40,7 @@ takePiece = (amount) => {
             pieces_container.children.item(i).classList.add('removed-piece');
         }  
     }
-    checkForWin();
+    
 };
 
 checkForWin = () => {
