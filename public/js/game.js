@@ -71,6 +71,24 @@ getOtherPlayer = () => {
     return data.currentPlayer == "1" + data.player1Name ? "2" + data.player2Name : "1" + data.player1Name;
 }
 
+computerTurn = () =>{
+    //NOT TESTED
+    var difficulty = data.difficulty;
+    if(difficulty == "medium"){
+        var randomDifficulty = Math.floor(Math.random() * Math.floor(2))
+        if(randomDifficulty == 0){
+            difficulty = "easy";
+        }
+    }
+    if (difficulty == "easy"){
+        var randomPiece = Math.floor(Math.random() * Math.floor(3)) + 1;
+        takePiece(randomPiece);
+    } else {
+        //hard stat
+    }
+
+}
+
 endGame = () => {
     //display game over screen
     //display play again/home buttons
