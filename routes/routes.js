@@ -24,13 +24,15 @@ let leaderboardSchema = mongoose.Schema ({
 
 let LeaderboardEntry = mongoose.model("leaderboardEntries", leaderboardSchema);
 
+let cookies;
 
 exports.index = (req, res) => {
     let top = LeaderboardEntry.find().sort({time: 1}).limit(10);
     top.exec((err, entries) => {
-        let wins = req.cookies.dailyWinStats != null ? req.cookies.dailyWinStats.wins : 0;
-        let losses = req.cookies.dailyWinStats != null ? req.cookies.dailyWinStats.losses : 0;
-        let winRate = (losses == 0 && wins == 0) ? "0%" : (100*wins)/(losses+wins) + "%";
+        let dailyWinStats = req.cookies.dailyWinStats != null ? JSON.parse(req.cookies.dailyWinStats) : 0;
+        let wins = req.cookies.dailyWinStats != null ? dailyWinStats.wins : 0;
+        let losses = req.cookies.dailyWinStats != null ? dailyWinStats.losses : 0;
+        let winRate = (losses == 0 && wins == 0) ? "0%" : ((100*wins)/(losses+wins)).toFixed(2) + "%";
         res.render('HomePage', {
             title: "Welcome to Nim",
             entries,
@@ -92,7 +94,7 @@ exports.databaseAdd = (req, res) => {
 exports.cookieUpdate = (req, res) => {
     let stats;
     if(req.cookies.dailyWinStats) {
-        stats = JSON.parse(dailyWinStats);
+        stats = JSON.parse(req.cookies.dailyWinStats);
     }
     else {
         stats = {
@@ -100,17 +102,12 @@ exports.cookieUpdate = (req, res) => {
             losses: 0
         }
     }
-    console.log(stats);
     if(req.body.gameWon) {
-        stats.wins++
+        stats.wins++;
     }
     else {
-        stats.losses++;   
+        stats.losses++;
     }
-    console.log(stats);
-    // res.cookie("dailyWinStats", stats, new Date().setHours(23,59,59,0));
-    res.cookie("dailyWinStats", JSON.stringify(stats), 100000);
-    res.cookie(`lastTimeHere`, new Date(), 2147483647);
-    res.cookie("visited", 1, {maxAge:99999999999});
-    
+    res.cookie("dailyWinStats", JSON.stringify(stats), {maxAge: new Date().setHours(23,59,59,0)-Date.now()});
+    res.send();
 };

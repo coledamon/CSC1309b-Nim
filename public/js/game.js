@@ -101,6 +101,7 @@ computerTurn = () =>{
     } else {
         //hard stat
     }
+    numPieces = numPieces > pieces_container.childElementCount ? pieces_container.childElementCount : numPieces;
     threeBtn.style.visibility = "Hidden";
     twoBtn.style.visibility = "Hidden";
     oneBtn.style.visibility = "Hidden";
@@ -156,12 +157,12 @@ sendCookie = (wonGame) => {
         gameWon: wonGame
     }
     let xmlHttp = new XMLHttpRequest();
-                xmlHttp.open("POST", `/updateCookie`)
-                xmlHttp.setRequestHeader("Content-type", "application/json");
-                xmlHttp.onreadystatechange = function() {
-                    
-                }
-                xmlHttp.send(JSON.stringify(win));
+    xmlHttp.open("POST", `/updateCookie`)
+    xmlHttp.setRequestHeader("Content-type", "application/json");
+    xmlHttp.onreadystatechange = function() {
+        
+    }
+    xmlHttp.send(JSON.stringify(win));
 }
 
 restartGame = () => {
