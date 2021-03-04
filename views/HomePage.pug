@@ -2,7 +2,7 @@ extends layout
 block content
     h1(class="title text-center") Nim
     div(class="homepage d-flex justify-content-center align-items-center flex-column" id="leaderboard")
-        button(type="button" class="btn-home-game" onclick="showSettings()") Play Game
+        button(type="button" class="btn btn-secondary btn-lg" onclick="showSettings()") Play Game
         div(class="container")
             div(class="row justify-content-md-center")
                 div(class="col-3")
@@ -72,7 +72,7 @@ block content
                 div(class="form-check text-center mt-2 mb-2")
                     input(class="form-check-input" type="radio" name="winCondition" value="lastLoses" id="secondaryWinCondition" checked)
                     label(class="form-check-label" for="secondaryWinCondition") Person that takes the last piece loses
-                button(type="button" onclick="showNameBox()") Continue
+                button(type="button" class="btn btn-secondary btn-lg" onclick="showNameBox()") Continue
             div(class="container d-none" id="nameContainer")
                 div(class="row")
                     div(class="col text-center")
