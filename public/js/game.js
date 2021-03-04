@@ -34,8 +34,9 @@ populateAndRenderPieces = () => {
     };
         
 };
-
+let turnAmount = 0;
 takePiece = (amount) => {
+    turnAmount = amount;
     //console.log(pieces_container.firstElementChild);
     let pieces_left = pieces_container.childElementCount - 1;
     for(i = pieces_left; i > pieces_left - amount; i--) {
@@ -45,20 +46,26 @@ takePiece = (amount) => {
         }  
     }
 };
-
+let numTaken = 0;
 checkForWin = () => {
-    if(pieces_container.childElementCount <= 0){
-        console.log(data);
-        console.log("game is over!");
-        twoBtn.style.visibility = "";
-        threeBtn.style.visibility = "";
-        document.getElementById("end-modal").style.display = "block";
-        document.getElementById("gamepage").style.visibility = "Hidden";
-        endGame();
-    }
-    else {
-        checkValidMoves();
-        switchTurns();
+    numTaken++;
+    if(numTaken == turnAmount) {
+        if(pieces_container.childElementCount <= 0){
+            console.log(data);
+            console.log("game is over!");
+            oneBtn.style.visibility = "";
+            twoBtn.style.visibility = "";
+            threeBtn.style.visibility = "";
+            document.getElementById("end-modal").style.display = "block";
+            document.getElementById("gamepage").style.visibility = "Hidden";
+            endGame();
+        }
+        else {
+            checkValidMoves();
+            switchTurns();
+        }
+        numTaken = 0;
+        turnAmount = 0;
     }
 };
 
@@ -70,12 +77,9 @@ switchTurns = () =>{
 
 checkValidMoves = () => {
     console.log(pieces_container.childElementCount);
-    if(pieces_container.childElementCount < 3) {
-        threeBtn.style.visibility = "Hidden";
-        if(pieces_container.childElementCount < 2) {
-            twoBtn.style.visibility = "Hidden";
-        }
-    }
+    threeBtn.style.visibility = pieces_container.childElementCount < 3 ? "Hidden" : "";
+    twoBtn.style.visibility = pieces_container.childElementCount < 2 ? "Hidden" : "";
+    oneBtn.style.visibility = pieces_container.childElementCount < 1 ? "Hidden" : "";
 }
 
 getOtherPlayer = () => {
@@ -102,11 +106,6 @@ computerTurn = () =>{
     oneBtn.style.visibility = "Hidden";
 
     setTimeout(takePiece, 1000, numPieces)//waits a few seconds
-    setTimeout(function(){
-        threeBtn.style.visibility = "Visible";
-        twoBtn.style.visibility = "Visible";
-        oneBtn.style.visibility = "Visible";
-    }, 1000);
     console.log("end computer turn")
     //takePiece(numPieces);
 }
@@ -173,4 +172,5 @@ restartGame = () => {
     data.firstPlayer = Math.random() < 0.5 ? "1" + data.player1Name : "2" + data.player2Name;
     data.currentPlayer = data.firstPlayer;
     playerName.innerHTML = data.currentPlayer.substring(1);
+    if(data.gameType == "pvc" && data.currentPlayer == "2Computer"){ computerTurn();}
 }
