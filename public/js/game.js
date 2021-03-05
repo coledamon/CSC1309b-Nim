@@ -106,7 +106,8 @@ computerTurn = () =>{
     twoBtn.style.visibility = "Hidden";
     oneBtn.style.visibility = "Hidden";
 
-    setTimeout(takePiece, 1000, numPieces)//waits a few seconds
+    // takePiece(numPieces);
+    setTimeout(takePiece, 300, numPieces)//waits a few seconds
     console.log("end computer turn")
     //takePiece(numPieces);
 }
