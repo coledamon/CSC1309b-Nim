@@ -21,15 +21,16 @@ window.onload = () => {
 };
 
 populateAndRenderPieces = () => {
-    //Add a piece 21 times
+    //Add a piece 21 times to piece container
     for(i = 0; i < 21; i++){
         let piece = document.createElement("span");
         piece.className = "game-piece";
-        // adds to every button when (the only) animation ends delete piece
+        // adds to every piece a function to delete piece after animation
         piece.addEventListener('animationend', function(){
             piece.remove();
             checkForWin();
         });
+        // adds piece to container (visible on screen)
         pieces_container.appendChild(piece);
     };     
 };
