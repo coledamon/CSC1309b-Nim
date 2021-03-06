@@ -1,8 +1,3 @@
-//TODO 
-//input proper variables into the renders, won't know what we need until we implement it
-// Pass game variables in when they press start?
-//Rendering two different versions of the home page. Maybe pass in a bool, and if it is true, it renders certain sections of the page?
-
 const mongoose = require("mongoose");
 mongoose.Promise = global.Promise;
 mongoose.connect("mongodb+srv://CSC130Nim:NimTime@cluster0.7bjfx.mongodb.net/CSC130Nim?retryWrites=true&w=majority", {
@@ -13,7 +8,6 @@ mongoose.connect("mongodb+srv://CSC130Nim:NimTime@cluster0.7bjfx.mongodb.net/CSC
 let mdb = mongoose.connection;
 mdb.on("error", console.error.bind(console, "connection error"));
 mdb.once("open", (callback) => {
-
 });
 
 let leaderboardSchema = mongoose.Schema ({
@@ -24,8 +18,6 @@ let leaderboardSchema = mongoose.Schema ({
 
 let LeaderboardEntry = mongoose.model("leaderboardEntries", leaderboardSchema);
 
-let cookies;
-
 exports.index = (req, res) => {
     let top = LeaderboardEntry.find().sort({time: 1}).limit(10);
     top.exec((err, entries) => {
@@ -33,6 +25,7 @@ exports.index = (req, res) => {
         let wins = req.cookies.dailyWinStats != null ? dailyWinStats.wins : 0;
         let losses = req.cookies.dailyWinStats != null ? dailyWinStats.losses : 0;
         let winRate = (losses == 0 && wins == 0) ? "0%" : ((100*wins)/(losses+wins)).toFixed(2) + "%";
+        
         res.render('HomePage', {
             title: "Welcome to Nim",
             entries,
@@ -40,8 +33,7 @@ exports.index = (req, res) => {
             losses,
             winRate
         });
-    });
-    
+    });  
 };
 
 exports.gameStart = (req, res) => {
@@ -55,12 +47,13 @@ exports.gameStart = (req, res) => {
     }
     req.session.winCon = req.body.winCondition;
     req.session.difficulty = req.body.difficulty;
+
     res.redirect("/play");
 }
 exports.playGame = (req, res) => {
     //determine who goes first
     let firstPlayer = Math.random() < 0.5 ? "1" + req.session.player1Name : "2" + req.session.player2Name;
-    console.log(firstPlayer);
+
     res.render('GamePage', {
         title: "Play Nim!",
         firstPlayer,
@@ -70,7 +63,6 @@ exports.playGame = (req, res) => {
         winCon: req.session.winCon,
         gameType: req.session.gameType
     });
-    //set/update cookie on game win/lose
 };
 
 exports.help = (req, res) => {
@@ -87,7 +79,6 @@ exports.databaseAdd = (req, res) => {
     });
 
     entry.save((err, entry) => {
-
     });
 };
 
@@ -108,6 +99,7 @@ exports.cookieUpdate = (req, res) => {
     else {
         stats.losses++;
     }
+    
     res.cookie("dailyWinStats", JSON.stringify(stats), {maxAge: new Date().setHours(23,59,59,0)-Date.now()});
     res.send();
 };

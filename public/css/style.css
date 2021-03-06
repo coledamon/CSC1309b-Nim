@@ -21,31 +21,6 @@ div{
     font-family: 'Crete Round', serif;
 }
 
-/* .home-body {
-    
-} */
-
-
-/* #dangerButton .btn-outline-danger:active, .btn-outline-danger.active{
-    color: #fff !important;
-    background-color: #dc3545 !important;
-} */
-
-/* .btn-outline-danger:not(:disabled):not(.disabled):active, .btn-outline-danger:not(:disabled):not(.disabled).active,
-.show > .btn-outline-danger.dropdown-toggle {
-  color: #fff;
-  background-color: #dc3545;
-  border-color: #dc3545;
-}
-
-.btn-outline-danger:not(:disabled):not(.disabled):active:focus, .btn-outline-danger:not(:disabled):not(.disabled).active:focus,
-.show > .btn-outline-danger.dropdown-toggle:focus {
-  box-shadow: 0 0 0 0.2rem rgba(220, 53, 69, 0.5);
-} */
-
-
-
-
 /* ------------------------------------------------------GamePage------------------------------------------------------------------------------ */
 
 #gamepage{
@@ -96,30 +71,25 @@ div{
 }
 
 .removed-piece{
-  
-  /*opacity: 0;*/
-
-  /*-webkit-animation-name: fadeout;
-  -webkit-animation-duration: 0.2s;
-  animation-name: fadeout;
-  animation-duration: 0.2s;*/
-
   -webkit-animation: flexShrink 0.5s ease forwards;
   animation: flexShrink 0.5s ease forwards;
   
 }
+
 @-webkit-keyframes flexShrink {
   to {
     transform: translateX(100%);
     opacity: 0;
   }
 }
+
 @keyframes flexShrink {
   to {
     transform: translateX(100%);
     opacity: 0;
   }
 }
+
 /* modal stuff here */
 
 .modal{
@@ -162,6 +132,7 @@ div{
 }
 
 /*modal animation*/
+
 @-webkit-keyframes movedown {
   from {top:-500px; opacity:0} 
   to {top:40%; opacity:1}

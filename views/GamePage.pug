@@ -4,14 +4,11 @@ block content
     div(id="gamepage")
         h2(class="playername" id="currentPlayer") #{currentPlayer}
         span(id="pieces-container")
-
-
         h3 Amount
         span(id="piece-button-container")
             div(id="oneBtn" class="piece-button" onclick="takePiece(1);") 1
             div(id="twoBtn" class="piece-button" onclick="takePiece(2);") 2
             div(id="threeBtn" class="piece-button" onclick="takePiece(3);") 3
-
     //d-none = to hide win/loss screen
     div(id="end-modal" class="modal")
         div(class="modal-content")    
@@ -20,7 +17,6 @@ block content
             div(class="modal-body")
                 button(type="button" class="btn btn-outline-success" onclick="restartGame()") Play Again
                 button(type="button" class="btn btn-outline-success" onclick="window.location.href='/'") Home
-
     script(type="text/javascript"). 
         var data = {
             title: "#{title}",

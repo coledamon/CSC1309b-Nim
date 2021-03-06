@@ -4,14 +4,14 @@ const bodyParser = require("body-parser");
 const path = require("path");
 const routes = require("./routes/routes");
 const cookieParser = require("cookie-parser");
-const debug = require('debug')("app:app");
 const cors = require("cors");
 
 const app = express();
 
 var corsOptions = {
     origin: '*',
-    credentials: true };
+    credentials: true 
+};
 
 app.use(cors(corsOptions));
 app.set("view engine", "pug");
@@ -38,7 +38,4 @@ app.get("/play", routes.playGame);
 app.post("/addToDatabase", routes.databaseAdd);
 app.post("/updateCookie", routes.cookieUpdate);
 
-
-
 app.listen(4000);
-debug("Listening on port 4000");

@@ -17,7 +17,6 @@ block content
                                 tr
                                     td #{item.name}
                                     td #{item.timeStr}
-
                 div(class="col-3") 
                     h4 #{name}
                     table(class="person-table table")
@@ -31,7 +30,6 @@ block content
                                 td #{wins}
                                 td #{losses}
                                 td #{winRate}  
-
     div(class="game-setting container text-center" id="settings" style="Visibility: Hidden")
         form(action="/" method="POST")
             div(id="settingsButtons")
@@ -44,8 +42,6 @@ block content
                                     input(type="radio" name="gameMode" id="pvp" value="pvp" autocomplete="off" onclick="checkMode(event)" checked)
                                 label(class="btn btn-outline-primary btn-mode" id="pvcLbl") Player vs Computer
                                     input(type="radio" name="gameMode" id="pvc" value="pvc" autocomplete="off" onclick="checkMode(event)")
-                            //- button(type="button" data-bs-toggle="button" class="btn btn-outline-primary btn-mode") Player vs Player
-                            //- button(type="button" data-bs-toggle="button" class="btn btn-outline-primary btn-mode") Player vs Computer
                 div(class="container d-none" id="diffSelect")
                     div(class="row")
                         div(class="col text-center")
@@ -57,15 +53,6 @@ block content
                                     input(type="radio" name="difficulty" id="medium" value="medium" autocomplete="off" onclick="checkDiff(event)")
                                 label(class="btn btn-outline-danger" id="hardLbl") Hard
                                     input(type="radio" name="difficulty" id="hard" value="hard" autocomplete="off" onclick="checkDiff(event)")
-                                //- input(type="radio" class="btn-check" name="gameMode" id="dangerButton easyMode" autocomplete="off")
-                                //- label(class="btn btn-outline-danger" for="easyMode") Easy
-                                //- input(type="radio" class="btn-check" name="gameMode" id="dangerButton mediumMode" autocomplete="off")
-                                //- label(class="btn btn-outline-danger" for="mediumMode") Medium
-                                //- input(type="radio" class="btn-check" name="gameMode" id="dangerButton hardMode" autocomplete="off")
-                                //- label(class="btn btn-outline-danger" for="hardMode") Hard
-                                //- button(type="button" id="dangerButton" data-bs-toggle="button" class="btn btn-outline-danger btn-level") Easy
-                                //- button(type="button" id="dangerButton" data-bs-toggle="button" class="btn btn-outline-danger btn-level") Medium
-                                //- button(type="button" id="dangerButton" data-bs-toggle="button" class="btn btn-outline-danger btn-level") Hard
                 div(class="form-check text-center mt-2")
                     input(class="form-check-input" type="radio" name="winCondition" value="lastWins" id="defaultWinCondition")
                     label(class="form-check-label" for="defaultWinCondition") Person that takes the last piece wins
@@ -82,5 +69,4 @@ block content
                         label(id="name2" style="Visibility: Hidden") Enter Player 2 Name: 
                             input(type="text" name="name2" placeholder="Enter Your Name") 
                 button(type="submit" id="playButton" class="btn btn-outline-dark btn-submit") Play
-
     script(src="/js/home.js")
