@@ -2,6 +2,7 @@ const pieces_container = document.getElementById("pieces-container");
 const oneBtn = document.getElementById("oneBtn");
 const threeBtn = document.getElementById("threeBtn");
 const twoBtn = document.getElementById("twoBtn");
+const playerName = document.getElementById("currentPlayer");
 const endModal = document.getElementById("end-modal");
 const gamePage = document.getElementById("gamepage");
 const winnerName = document.getElementById("winnername");
@@ -14,6 +15,7 @@ window.onload = () => {
     if(data.player1Name == "") {
         window.location.href="/";
     }
+    playerName.innerHTML = data.currentPlayer.substring(1);
     if(data.gameType == "pvc" && data.currentPlayer == "2Computer") { 
         computerTurn();
     }
@@ -74,6 +76,7 @@ checkForWin = () => {
 //If it isn't, current player becomes player 1
 switchTurns = () => {
     data.currentPlayer = data.currentPlayer == "1" + data.player1Name ? "2" + data.player2Name : "1" + data.player1Name;
+    playerName.innerHTML = data.currentPlayer.substring(1);
     if(data.gameType == "pvc" && data.currentPlayer == "2Computer") { 
         computerTurn();
     }
@@ -210,6 +213,7 @@ restartGame = () => {
     start = Date.now();
     data.firstPlayer = Math.random() < 0.5 ? "1" + data.player1Name : "2" + data.player2Name;
     data.currentPlayer = data.firstPlayer;
+    playerName.innerHTML = data.currentPlayer.substring(1);
     if(data.gameType == "pvc" && data.currentPlayer == "2Computer") { 
         computerTurn();
     }

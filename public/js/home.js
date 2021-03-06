@@ -9,7 +9,7 @@ const diffSelect = document.getElementById("diffSelect");
 
 //switches from leaderboard view to settings view
 showSettings = () => {
-	settings.style.visibility="";
+	settings.classList.remove("d-none");
 	leaderboard.classList.replace("d-flex", "d-none");
 }
 
