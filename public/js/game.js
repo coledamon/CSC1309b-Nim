@@ -91,28 +91,29 @@ computerTurn = () =>{
     var piecesLeft = pieces_container.childElementCount;
     var numPieces = 0;
     //if medium difficulty, sets it to either hard or easy
-    if (difficulty == "easy"){
-        numPieces = Math.floor(Math.random() * Math.floor(3)) + 1;
-    }
-    else if(difficulty == "medium"){
-        var randomDifficulty = Math.floor(Math.random() * Math.floor(2))
+    
+    if(difficulty == "medium"){
+        var randomDifficulty = Math.ceil(Math.random() * 2);
         if(randomDifficulty == 0){
             difficulty = "easy";
         }
-    } 
+    }
+    if (difficulty == "easy"){
+        numPieces = Math.ceil(Math.random() * 3);
+    }
     else {
         //Hard strat
         if(data.winCon == "lastWins"){
             //checks to see if piece is in range
             if(piecesLeft % 4 == 0) {
-                numPieces = Math.floor(Math.random() * Math.floor(3)) + 1;
+                numPieces = Math.ceil(Math.random() * 3);
             }
             else {
                 numPieces = piecesLeft % 4;
             }
         } else {
             if((piecesLeft - 1) % 4 == 0) {
-                numPieces = Math.floor(Math.random() * Math.floor(3)) + 1;
+                numPieces = Math.ceil(Math.random() * 3);
             }
             else {
                 numPieces = (piecesLeft - 1) % 4;
