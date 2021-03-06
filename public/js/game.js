@@ -68,6 +68,10 @@ checkForWin = () => {
 };
 
 switchTurns = () => {
+    //Checks if the current player is player one
+    //If it is, current player becomes player 2
+    //If it isn't, current player becomes player 1
+
     data.currentPlayer = data.currentPlayer == "1" + data.player1Name ? "2" + data.player2Name : "1" + data.player1Name;
     playerName.innerHTML = data.currentPlayer.substring(1);
     if(data.gameType == "pvc" && data.currentPlayer == "2Computer") { 
@@ -76,6 +80,7 @@ switchTurns = () => {
 }
 
 checkValidMoves = () => {
+    //if there are less pieces on the board than the buttons, then it removes the corresponding button
     threeBtn.style.visibility = pieces_container.childElementCount < 3 ? "Hidden" : "";
     twoBtn.style.visibility = pieces_container.childElementCount < 2 ? "Hidden" : "";
     oneBtn.style.visibility = pieces_container.childElementCount < 1 ? "Hidden" : "";
@@ -89,6 +94,9 @@ computerTurn = () => {
     var difficulty = data.difficulty;
     var piecesLeft = pieces_container.childElementCount;
     var numPieces = 0;
+    //easy: random pieces
+    //medium: randomly chooses between easy and hard
+    //hard: mathmatical calculations to win
 
     //if medium difficulty, sets it to either hard or easy
     if(difficulty == "medium") {
@@ -97,13 +105,18 @@ computerTurn = () => {
             difficulty = "easy";
         }
     }
+
+    //randomly selects an amount of pieces
     if (difficulty == "easy") {
         numPieces = Math.ceil(Math.random() * 3);
     }
     else {
         //Hard strat
+            //checks to see it is in our range of 4 multiples
+            //what you need to keep it at to win
+            //if it isn't, it makes it so it is.
+
         if(data.winCon == "lastWins") {
-            //checks to see if piece is in range
             if(piecesLeft % 4 == 0) {
                 numPieces = Math.ceil(Math.random() * 3);
             }
@@ -121,11 +134,12 @@ computerTurn = () => {
         }
     }
     numPieces = numPieces > pieces_container.childElementCount ? pieces_container.childElementCount : numPieces;
-    
+    //hides button while Computer's turn
     threeBtn.style.visibility = "Hidden";
     twoBtn.style.visibility = "Hidden";
     oneBtn.style.visibility = "Hidden";
 
+    //makes it wait a second before the computer goes
     setTimeout(takePiece, 300, numPieces)
 }
 
@@ -165,6 +179,8 @@ endGame = () => {
         }else {
             data.player2Wins++;
         }
+        document.getElementById("player1Wins").innerHTML = data.player1Name + ": " + data.player1Wins;
+        document.getElementById("player2Wins").innerHTML = data.player2Name + ": " + data.player2Wins;
     }
 }
 
