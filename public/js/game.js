@@ -2,24 +2,24 @@ const pieces_container = document.getElementById("pieces-container");
 const oneBtn = document.getElementById("oneBtn");
 const threeBtn = document.getElementById("threeBtn");
 const twoBtn = document.getElementById("twoBtn");
-const playerName = document.getElementById("currentPlayer");
 const endModal = document.getElementById("end-modal");
 const gamePage = document.getElementById("gamepage");
 const winnerName = document.getElementById("winnername");
 
 let start;
+//starts the timer & starts the computer turn if it goes first
 window.onload = () => {
     populateAndRenderPieces();
     start = Date.now();
     if(data.player1Name == "") {
         window.location.href="/";
     }
-    playerName.innerHTML = data.currentPlayer.substring(1);
     if(data.gameType == "pvc" && data.currentPlayer == "2Computer") { 
         computerTurn();
     }
 };
 
+//sets up the pile of pieces for the game to use
 populateAndRenderPieces = () => {
     //Add a piece 21 times to piece container
     for(i = 0; i < 21; i++){
@@ -36,6 +36,7 @@ populateAndRenderPieces = () => {
 };
 
 let turnAmount = 0;
+//iterates through the pieces container, taking out the specified number of pieces
 takePiece = (amount) => {
     turnAmount = amount;
     let pieces_left = pieces_container.childElementCount - 1;
@@ -47,6 +48,7 @@ takePiece = (amount) => {
 };
 
 let numTaken = 0;
+//fires only after all pieces are taken, checks to see if there are any pieces left, indicating an endgame state
 checkForWin = () => {
     numTaken++;
     if(numTaken == turnAmount) {
@@ -67,29 +69,24 @@ checkForWin = () => {
     }
 };
 
+//Checks if the current player is player one
+//If it is, current player becomes player 2
+//If it isn't, current player becomes player 1
 switchTurns = () => {
-    //Checks if the current player is player one
-    //If it is, current player becomes player 2
-    //If it isn't, current player becomes player 1
-
     data.currentPlayer = data.currentPlayer == "1" + data.player1Name ? "2" + data.player2Name : "1" + data.player1Name;
-    playerName.innerHTML = data.currentPlayer.substring(1);
     if(data.gameType == "pvc" && data.currentPlayer == "2Computer") { 
         computerTurn();
     }
 }
 
+//checks the number of pieces left on the board and hides/shows the appropriate buttons
 checkValidMoves = () => {
-    //if there are less pieces on the board than the buttons, then it removes the corresponding button
     threeBtn.style.visibility = pieces_container.childElementCount < 3 ? "Hidden" : "";
     twoBtn.style.visibility = pieces_container.childElementCount < 2 ? "Hidden" : "";
     oneBtn.style.visibility = pieces_container.childElementCount < 1 ? "Hidden" : "";
 }
 
-getOtherPlayer = () => {
-    return data.currentPlayer == "1" + data.player1Name ? "2" + data.player2Name : "1" + data.player1Name;
-}
-
+//contains the logic to allow the computer to take its turn
 computerTurn = () => {
     var difficulty = data.difficulty;
     var piecesLeft = pieces_container.childElementCount;
@@ -98,7 +95,7 @@ computerTurn = () => {
     //medium: randomly chooses between easy and hard
     //hard: mathmatical calculations to win
 
-    //if medium difficulty, sets it to either hard or easy
+    //if medium difficulty, it randomly chooses either hard or easy strategy each turn
     if(difficulty == "medium") {
         var randomDifficulty = Math.floor(Math.random() * 2);
         if(randomDifficulty == 0) {
@@ -112,9 +109,12 @@ computerTurn = () => {
     }
     else {
         //Hard strat
-            //checks to see it is in our range of 4 multiples
-            //what you need to keep it at to win
-            //if it isn't, it makes it so it is.
+            //last taken wins:
+            //takes enough legal pieces to get to a multiple of 4 if it is on track to win, 
+            //otherwise, takes a random number of pieces
+            //last taken loses: 
+            //takes enough legal pieces to get to 1 above a multiple of 4 if it is on track to win,
+            //otherwise, takes a random number of pieces
 
         if(data.winCon == "lastWins") {
             if(piecesLeft % 4 == 0) {
@@ -134,7 +134,7 @@ computerTurn = () => {
         }
     }
     numPieces = numPieces > pieces_container.childElementCount ? pieces_container.childElementCount : numPieces;
-    //hides button while Computer's turn
+    //hides button while Computer takes its turn
     threeBtn.style.visibility = "Hidden";
     twoBtn.style.visibility = "Hidden";
     oneBtn.style.visibility = "Hidden";
@@ -143,9 +143,14 @@ computerTurn = () => {
     setTimeout(takePiece, 300, numPieces)
 }
 
+//helper function for endgame to determine the winner
+getOtherPlayer = () => {
+    return data.currentPlayer == "1" + data.player1Name ? "2" + data.player2Name : "1" + data.player1Name;
+}
+
+//display game over modal
+//Increases win counters either through local data (pvp) or cookies (pvp)
 endGame = () => {
-    //display game over screen
-    //display play again/home buttons
     let winningPlayer = data.winCon == "lastWins" ? data.currentPlayer : getOtherPlayer();
     
     winnerName.innerHTML = winningPlayer.substring(1) + " Wins!!";
@@ -184,6 +189,7 @@ endGame = () => {
     }
 }
 
+//sends an http request to the server to update the cookies stored in req.cookies
 sendCookie = (wonGame) => {
     let win = {
         gameWon: wonGame
@@ -196,6 +202,7 @@ sendCookie = (wonGame) => {
     xmlHttp.send(JSON.stringify(win));
 }
 
+//resets the game state to a new game without reloading the page
 restartGame = () => {
     endModal.style.display = "none";
     gamePage.style.visibility = "";
@@ -203,7 +210,6 @@ restartGame = () => {
     start = Date.now();
     data.firstPlayer = Math.random() < 0.5 ? "1" + data.player1Name : "2" + data.player2Name;
     data.currentPlayer = data.firstPlayer;
-    playerName.innerHTML = data.currentPlayer.substring(1);
     if(data.gameType == "pvc" && data.currentPlayer == "2Computer") { 
         computerTurn();
     }

@@ -18,6 +18,7 @@ let leaderboardSchema = mongoose.Schema ({
 
 let LeaderboardEntry = mongoose.model("leaderboardEntries", leaderboardSchema);
 
+//gets the information from the daily win cookie (if any) and renders the home page
 exports.index = (req, res) => {
     let top = LeaderboardEntry.find().sort({time: 1}).limit(10);
     top.exec((err, entries) => {
@@ -36,6 +37,7 @@ exports.index = (req, res) => {
     });  
 };
 
+//pulls in all of the information from the settings chosen on the home page and stores them for use later
 exports.gameStart = (req, res) => {
     req.session.player1Name = req.body.name != "" ? req.body.name : "Player 1";
     req.session.gameType = req.body.gameMode;
@@ -50,6 +52,8 @@ exports.gameStart = (req, res) => {
 
     res.redirect("/play");
 }
+
+//randomly choose who goes first and renders the game page with the information pulled from the settings
 exports.playGame = (req, res) => {
     //determine who goes first
     let firstPlayer = Math.random() < 0.5 ? "1" + req.session.player1Name : "2" + req.session.player2Name;
@@ -65,12 +69,14 @@ exports.playGame = (req, res) => {
     });
 };
 
+//renders the help page
 exports.help = (req, res) => {
     res.render('HelpPage', {
         title: "Help"
     });
 };
 
+//adds a new entry to the leaderboard
 exports.databaseAdd = (req, res) => {
     let entry = new LeaderboardEntry({
         name: req.body.winner,
@@ -82,6 +88,7 @@ exports.databaseAdd = (req, res) => {
     });
 };
 
+//adds or updates the daily win tracking cookie
 exports.cookieUpdate = (req, res) => {
     let stats;
     if(req.cookies.dailyWinStats) {
@@ -99,7 +106,7 @@ exports.cookieUpdate = (req, res) => {
     else {
         stats.losses++;
     }
-    
+
     res.cookie("dailyWinStats", JSON.stringify(stats), {maxAge: new Date().setHours(23,59,59,0)-Date.now()});
     res.send();
 };

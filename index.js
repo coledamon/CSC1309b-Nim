@@ -6,6 +6,7 @@ const routes = require("./routes/routes");
 const cookieParser = require("cookie-parser");
 const cors = require("cors");
 
+//set up express app
 const app = express();
 
 var corsOptions = {
@@ -13,6 +14,7 @@ var corsOptions = {
     credentials: true 
 };
 
+//set up settings for app
 app.use(cors(corsOptions));
 app.set("view engine", "pug");
 app.set("views", __dirname + "/views");
@@ -31,6 +33,7 @@ app.use(expressSession({
 
 app.use(cookieParser());
 
+//set up routes for the app to use
 app.get("/", routes.index);
 app.post("/", routes.gameStart);
 app.get("/help", routes.help);
