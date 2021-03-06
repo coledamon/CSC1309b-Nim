@@ -1,0 +1,87 @@
+extends layout
+block content
+    h1(class="title text-center") Nim
+    div(class="homepage d-flex justify-content-center align-items-center flex-column" id="leaderboard")
+        button(type="button" class="btn btn-secondary btn-lg" onclick="showSettings()") Play Game
+        //- This is the container for the 2 tables that will hold the games High Scores 
+        //- This table hold the highest scores across multiple instances of Nim
+        div(class="container")
+            div(class="row justify-content-md-center")
+                div(class="col-3")
+                    h4 HighScores
+                    table(class="highscore-table table table-sm")
+                        thead
+                            tr
+                                th(scope="col" class="") Name
+                                th(scope="col" class="") Time
+                        tbody
+                            each item in entries
+                                tr
+                                    td #{item.name}
+                                    td #{item.timeStr}
+
+                //- This table holds the daily local score for this instance of Nim
+                div(class="col-3") 
+                    h4 #{name}
+                    table(class="person-table table")
+                        thead
+                            tr
+                                th(scope="col" class="col-6 col-md-4") Wins
+                                th(scope="col" class="col-6 col-md-4") Loss
+                                th(scope="col" class="col-6 col-md-4") Win Percentage
+                        tbody
+                            tr
+                                td #{wins}
+                                td #{losses}
+                                td #{winRate}  
+
+    //- This section is hidden until the user decides to play a game of Nim.
+        it's the game's settings
+    div(class="game-setting container text-center d-none" id="settings")
+        form(action="/" method="POST")
+            div(id="settingsButtons")
+                div(class="container ")
+                    div(class="row")
+                        div(class="col text-center")
+                            //- game modes
+                            p(href="#" class="section-title  mt-2") Modes
+                            div(class="btn-group btn-group-toggle" data-toggle="buttons")
+                                label(class="btn btn-outline-primary btn-mode active" id="pvpLbl") Player vs Player
+                                    input(type="radio" name="gameMode" id="pvp" value="pvp" autocomplete="off" onclick="checkMode(event)" checked)
+                                label(class="btn btn-outline-primary btn-mode" id="pvcLbl") Player vs Computer
+                                    input(type="radio" name="gameMode" id="pvc" value="pvc" autocomplete="off" onclick="checkMode(event)")
+                //- difficulties
+                div(class="container d-none" id="diffSelect")
+                    div(class="row")
+                        div(class="col text-center")
+                            p(class="section-title  mt-2") Difficulty
+                            div(class="btn-group btn-group-toggle" data-toggle="buttons")
+                                //- The class btn-outline allows for these radio buttons to have color and to change color based on what is checked.
+                                label(class="btn btn-outline-danger active" id="easyLbl") Easy
+                                    input(type="radio" name="difficulty" id="easy" value="easy" autocomplete="off" onclick="checkDiff(event)" checked)
+                                label(class="btn btn-outline-danger" id="mediumLbl") Medium
+                                    input(type="radio" name="difficulty" id="medium" value="medium" autocomplete="off" onclick="checkDiff(event)")
+                                label(class="btn btn-outline-danger" id="hardLbl") Hard
+                                    input(type="radio" name="difficulty" id="hard" value="hard" autocomplete="off" onclick="checkDiff(event)")
+                //- win conditions
+                div(class="form-check text-center mt-2")
+                    input(class="form-check-input" type="radio" name="winCondition" value="lastWins" id="defaultWinCondition")
+                    label(class="form-check-label" for="defaultWinCondition") Person that takes the last piece wins
+                
+                div(class="form-check text-center mt-2 mb-2")
+                    input(class="form-check-input" type="radio" name="winCondition" value="lastLoses" id="secondaryWinCondition" checked)
+                    label(class="form-check-label" for="secondaryWinCondition") Person that takes the last piece loses
+                
+                button(type="button" class="btn btn-secondary btn-lg" onclick="showNameBox()") Continue
+            //- name submission
+            div(class="container d-none" id="nameContainer")
+                div(class="row")
+                    div(class="col text-center")
+                        label(id="name") Enter Player 1 Name: 
+                            input(type="text" name="name" placeholder="Enter Your Name") 
+                        br
+                        label(id="name2" style="Visibility: Hidden") Enter Player 2 Name: 
+                            input(type="text" name="name2" placeholder="Enter Your Name") 
+                button(type="submit" id="playButton" class="btn btn-outline-dark btn-submit") Play
+
+    script(src="/js/home.js")

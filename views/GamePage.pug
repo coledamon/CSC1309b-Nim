@@ -1,0 +1,37 @@
+extends layout 
+block content
+    //- pieces container
+    div(id="gamepage")
+        h2(class="playername" id="currentPlayer") #{currentPlayer}
+        span(id="pieces-container")
+
+        h3 Amount
+        span(id="piece-button-container")
+            div(id="oneBtn" class="piece-button" onclick="takePiece(1);") 1
+            div(id="twoBtn" class="piece-button" onclick="takePiece(2);") 2
+            div(id="threeBtn" class="piece-button" onclick="takePiece(3);") 3
+    //- end game modal
+    div(id="end-modal" class="modal")
+        div(class="modal-content")    
+            div(class="modal-header")
+                h2(class="playername" id="winnername") 
+            div(class="modal-body")
+                h3(id="player1Wins" class="playerWins") 
+                h3(id="player2Wins" class="playerWins") 
+                button(type="button" class="btn btn-outline-success" onclick="restartGame()") Play Again
+                button(type="button" class="btn btn-outline-success" onclick="window.location.href='/'") Home
+    //- script to pass data through pug to game.js     
+    script(type="text/javascript"). 
+        var data = {
+            title: "#{title}",
+            firstPlayer: "#{firstPlayer}",
+            currentPlayer: "#{firstPlayer}",
+            player1Name: "#{player1Name}",
+            player2Name: "#{player2Name}",
+            winCon: "#{winCon}",
+            gameType: "#{gameType}",
+            difficulty: "#{difficulty}",
+            player1Wins: 0,
+            player2Wins: 0
+        }
+    script(src="/js/game.js")
