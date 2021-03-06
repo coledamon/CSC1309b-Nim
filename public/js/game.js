@@ -93,7 +93,7 @@ computerTurn = () =>{
     //if medium difficulty, sets it to either hard or easy
     
     if(difficulty == "medium"){
-        var randomDifficulty = Math.ceil(Math.random() * 2);
+        var randomDifficulty = Math.floor(Math.random() * 2);
         if(randomDifficulty == 0){
             difficulty = "easy";
         }
