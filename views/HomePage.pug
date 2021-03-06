@@ -3,6 +3,8 @@ block content
     h1(class="title text-center") Nim
     div(class="homepage d-flex justify-content-center align-items-center flex-column" id="leaderboard")
         button(type="button" class="btn btn-secondary btn-lg" onclick="showSettings()") Play Game
+        //- This is the container for the 2 tables that will hold the games High Scores 
+        //- This table hold the highest scores across multiple instances of Nim
         div(class="container")
             div(class="row justify-content-md-center")
                 div(class="col-3")
@@ -18,6 +20,7 @@ block content
                                     td #{item.name}
                                     td #{item.timeStr}
 
+                //- This table holds the local score for this instance of Nim
                 div(class="col-3") 
                     h4 #{name}
                     table(class="person-table table")
@@ -32,6 +35,8 @@ block content
                                 td #{losses}
                                 td #{winRate}  
 
+    //- This section is hidden until the user decides to play a game of Nim.
+        it's the game's settings
     div(class="game-setting container text-center" id="settings" style="Visibility: Hidden")
         form(action="/" method="POST")
             div(id="settingsButtons")
@@ -50,6 +55,7 @@ block content
                         div(class="col text-center")
                             p(class="section-title  mt-2") Difficulty
                             div(class="btn-group btn-group-toggle" data-toggle="buttons")
+                                //- The class btn-outline allows for these radio buttons to have color and to change color based on what is checked.
                                 label(class="btn btn-outline-danger active" id="easyLbl") Easy
                                     input(type="radio" name="difficulty" id="easy" value="easy" autocomplete="off" onclick="checkDiff(event)" checked)
                                 label(class="btn btn-outline-danger" id="mediumLbl") Medium
