@@ -13,6 +13,4 @@ as a daily win/loss tracker.
 - If you'd like to save the leaderboard to your own database, simply replace the connection string in routes/routes.js.
 
 ### Required software:
-- Node.js
-=======
-just click run
+- Node.js (https://nodejs.org/en/)
