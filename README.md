@@ -14,3 +14,5 @@ as a daily win/loss tracker.
 
 ### Required software:
 - Node.js
+=======
+just click run
